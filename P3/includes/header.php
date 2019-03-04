@@ -15,13 +15,13 @@
                 <li><a href="index.php #formulaire_contact">Contact</a>
                 </li>
                 <?php
-                include 'includes/functionsSQL.php';
+                require 'includes/functionsSQL.php';
 
                 if(isset($_SESSION['pseudo']))
                 {
-                    $reponse = $bdd->query('SELECT * FROM membres WHERE pseudo=\'' .$_SESSION['pseudo']. '\'');
+                    $reponseSession = $bdd->query('SELECT * FROM membres WHERE pseudo=\'' .$_SESSION['pseudo']. '\'');
 
-                    while($donnees = $reponse->fetch())
+                    while($donnees = $reponseSession->fetch())
                     {
                         $_SESSION['id_groupe'] = $donnees['id_groupe'];
                     }

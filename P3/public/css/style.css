@@ -1,0 +1,384 @@
+h1, h2, h3
+{
+    text-align:center;
+    font-weight: bold;
+}
+
+/* MENU GENERAL */
+#custom-bootstrap-menu.navbar-default .navbar-brand {
+    color: #d35907;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: -20px;
+}
+#custom-bootstrap-menu.navbar-default {
+    font-size: 14px;
+    background-color: rgba(20, 0, 20, 0);
+    border-width: 0px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+    background-color: rgba(218, 74, 74, 0);
+    font-weight: bold;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+    color: #d35907;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
+    color: #f39f01;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle {
+    border-color: #dddddd;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+    background-color: #dddddd;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #dddddd;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #d35907;
+}
+#bottom-header{
+    background-color: rgba(211, 89, 7, 0.7);
+}
+#top-header{
+    background-color: #2b2b2b;
+}
+
+/* MENU ACCUEIL */
+#introduction #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+}
+#introduction #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+#introduction #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+    color: #d35907;
+}
+#introduction #custom-bootstrap-menu.navbar-default {
+    background-color: rgba(255, 255, 255, 0);
+}
+#introduction #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/* MENU ADMIN */
+#top_admin #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    color: #000000;
+}
+#top_admin #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+#top_admin #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+    color: #d35907;
+}
+
+#admin-header{
+    background-color: brown;
+}
+
+/* MENU DEROULANT*/
+#menu ul {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    text-align:center;
+    }
+#menu .dropdown li {
+    float:left;
+    margin:auto;
+    padding:0;
+    background-color:#2b2b2b;
+    }
+#menu .dropdown li a {
+    display:block;
+    width:100px;
+    color:white;
+    text-decoration:none;
+    padding:5px;
+    }
+#menu .dropdown li a:hover {
+    color:#f27300;
+}
+#menu .dropdown {
+    display:none;
+    z-index: 5;
+}
+#menu ul li:hover ul {
+    display:block;
+}
+#menu li:hover ul li {
+    float:none;
+}
+#menu li ul {
+    position:absolute;
+}
+
+#menu {
+    height:50px;
+}
+
+/* MENU DEROULANT ACCUEIL */
+#introduction #menu .dropdown li {
+    background-color:rgba(43, 43, 43, 0.5);
+    }
+
+/* INTRODUCTION */
+#introduction{
+    background: url(../img/british-columbia_alaska_reka_goryi_derevya_samolt.jpg) no-repeat center top;
+    margin-top: -20px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    text-align: center;
+    background-color: #bdbdbd;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 700px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    /*position: relative;*/
+               
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+            
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+               
+#introduction h1{
+    margin-top: 150px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#introduction h3{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#introduction #news{
+    padding-top: 100px;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+#introduction a{
+    color: #f27300;
+    font-size: 40px;
+}
+#introduction #menu a{
+    font-size: 14px;
+}
+#introduction .btn-lg{
+    background-color: #f27300;
+    border-color: rgba(255, 255, 255, 0);
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 30px;
+}
+#introduction .btn-lg:hover{
+    background-color: #d35907;
+}
+
+/* CONTENU ACCUEIL */
+#description_roman, #formulaire_contact{
+    padding-bottom: 30px;
+}
+#formulaire_contact{
+    padding-top: 30px;
+}
+.container_accueil h3{
+    color: #f27300;
+    font-size: 35px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+#description_roman{
+    text-align: center;
+}
+.barre_separation{
+    background-color: #f27300;
+    height: 4px;
+    border-radius: 5px;
+}
+
+/* CONTENU BLOG */
+.title-blog{
+    font-weight: bold;
+    font-size: 40px;
+    color: #0A658D;
+    padding: 15px 0 30px 0;
+}
+.chapitre-blog{
+    padding: 30px 0 30px 0;
+}
+#news-article{
+    margin-bottom:30px;
+    border: 1px solid #bdbdbd;
+    background-color: rgba(189, 189, 189, 0.2);/*rgba(189, 189, 189, 0.2)*/
+    padding-bottom: 10px;
+}
+#news-article p{
+    background-color: transparent !important;
+}
+#title-article{
+    color: #0A658D;
+}
+.edit_button{
+    padding-top: 10px;
+}
+
+/* CONTENU ARTICLE */
+#title-book-article #button-article{
+    border-radius: 0 0 5px 5px;
+    border-color: rgba(211, 89, 7, 0.7);
+    margin-top: -1px;
+}
+#title-book-article #button-article:hover{
+    background-color: #2b2b2b;
+    color: #d35907;
+    border-top-color: #2b2b2b;
+}
+#news #title-article{
+    font-size: 30px;
+    padding: 30px 0 30px 0;
+}
+#news p{
+    padding-bottom: 15px;
+}
+#news{
+    padding-bottom: 30px;
+}
+.commentaire-block{
+    padding-top: 30px;
+}
+.commentaire-block h2{
+    padding-bottom: 30px;
+}
+.single-commentaire{
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(189, 189, 189, 0.2);
+    padding: 5px;
+}
+.formulaire-commentaire{
+    margin-top: 30px;
+}
+
+/* CONTENU BIO */
+#bio_auteur{
+    text-align: center;
+}
+.title_bio{
+    padding: 15px 0 15px 0;
+}
+.photo_auteur{
+    padding-top: 50px;
+}
+#bio_auteur p{
+    margin: 30px 0 30px 0;
+}
+.block_roman{
+    padding-top: 50px;
+}
+.img_roman{
+    padding-bottom: 30px;
+}
+
+/* CONTENU FORMULAIRE CONNEXION - INSCRIPTION - ADMINISTRATEUR */
+#formulaire_connexion{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.corps{
+    min-height: calc(100vh - 100px);/* Ramène le footer en bas de page */
+}
+#formulaire_connexion .barre_separation{
+    margin-top: 14px;
+}
+#formulaire_connexion p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+#formulaire_connexion .erreur_inscription{
+    font-size: 15px;
+    color: red;
+}
+#formulaire_connexion .form-horizontal{
+    margin-bottom: 15px;
+}
+.separation_inscription{
+    padding-bottom: 15px;
+}
+.admin_section{
+    text-align: center;
+}
+.admin-header
+{
+    text-align: center;
+}
+.admin_block
+{
+    margin-top: 30px;
+}
+
+/* CONTENU MENTIONS LEGALES */
+.mention_contenu{
+    padding: 30px 0 30px 0;
+}
+.title_mention{
+    padding: 15px 0 15px 0;
+}
+.title_mention h3{
+    color: #f27300;
+    font-size: 35px;
+    font-weight: bold;
+}
+.mention_contenu h4{
+    font-weight: bold;
+}
+/* FOOTER */
+footer{
+    background-color: #bdbdbd;
+}
+footer p{
+    text-align: center;
+}
+.btn-circle.btn-lg{
+    width: 5rem;
+    height: 5rem;
+    padding: 0.625rem 1rem;
+    font-size: 2rem;
+    border-radius: 2.5rem;
+    border-color: #000000;
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0);
+}
+.btn-circle.btn-lg:hover{
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: #000000;
+}
+.reseau-sociaux{
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+footer a,
+footer a:hover{
+    color: #d35907;
+}
+footer a:hover{
+    font-weight: bold;
+}

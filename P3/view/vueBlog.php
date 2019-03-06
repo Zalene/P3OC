@@ -56,16 +56,16 @@
                 $nombreDePages = ceil($nombredElementsTotal / $limite);
 
                 if ($page > 1):
-                    ?><a href="?page=<?php echo $page - 1; ?>">Page précédente</a> — <?php
+                    ?><a href="?action=blog&amp;page=<?php echo $page - 1; ?>">Page précédente</a> — <?php
                 endif;
 
                 // On effectue une boucle autant de fois que l'on a de pages
                 for ($i = 1; $i <= $nombreDePages; $i++):
-                    ?><a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
+                    ?><a href="?action=blog&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
                 endfor;
 
                 if ($page < $nombreDePages):
-                    ?>— <a href="?page=<?php echo $page + 1; ?>">Page suivante</a><?php
+                    ?>— <a href="?action=blog&amp;page=<?php echo $page + 1; ?>">Page suivante</a><?php
                 endif;
                 ?>
             </div>

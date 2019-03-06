@@ -1,10 +1,16 @@
 <?php
-require 'Modele.php';
+require 'Controleur/controleur.php';
 
 try {
-    $lastBillet = getLastBillet();
-    require 'view/vueAccueil.php';
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] == 'blog') {
+            blog();
+        }
+    }
+    else {
+        accueil();
+    }
 }
 catch (Exception $e) {
-    echo '<html><body>Erreur ! ' . $e->getMessage() . '</body></html>';
+    erreur($e->getMessage());
 }

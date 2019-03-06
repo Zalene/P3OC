@@ -9,8 +9,6 @@
             </div>
             <div class="row">
                 <?php
-                // On récupère le dernier billet
-                //$req = $bdd->query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 0, 1');
 
                 while ($donnees = $lastBillet->fetch())
                 {

@@ -8,7 +8,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index.php">Accueil</a>
                 </li>
-                <li><a href="blog.php">Blog</a>
+                <li><a href="index.php?action=blog">Blog</a>
                 </li>
                 <li><a href="bio.php">Biographie</a>
                 </li>

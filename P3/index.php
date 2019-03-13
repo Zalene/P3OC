@@ -24,6 +24,9 @@ try {
         elseif ($_GET['action'] == 'updateBillet') {
             adminBillets();
         }
+        elseif ($_GET['action'] == 'updateComment') {
+            updateComment();
+        }
         elseif ($_GET['action'] == 'createBillet') {
             adminCreateBillet();
         }
@@ -35,6 +38,9 @@ try {
         }
         elseif ($_GET['action'] == 'changePassword') {
             changePassword();
+        }
+        elseif ($_GET['action'] == 'mentions') {
+            mentionsLegales();
         }
     }
     else {

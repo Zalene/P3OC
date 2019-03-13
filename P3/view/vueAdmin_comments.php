@@ -16,6 +16,25 @@
 
         <div class="admin_block">
             <?php
+                if(isset($_POST['deleteComment'])){
+                $id_el = $_POST['id'];
+
+                $bdd->query("DELETE FROM commentaires WHERE id= $id_el");
+            ?>
+                <meta http-equiv="refresh" content="1; url=<?php echo $_SERVER["HTTP_REFERER"]  ; ?>" />
+            <?php
+                }
+                if(isset($_POST['unreportComment'])){
+                $id_com = $_POST['id'];
+
+                $sth = $bdd->prepare('UPDATE commentaires SET report = 0 WHERE id = :id');
+                $sth->bindValue(':id', $id_com, PDO::PARAM_INT);
+                $sth->execute();
+            ?>
+                <meta http-equiv="refresh" content="1; url=<?php echo $_SERVER["HTTP_REFERER"]  ; ?>" />
+            <?php
+                }
+
             while ($donnees = $reportedComments->fetch())
             {
                 $report = $donnees['report'];
@@ -30,12 +49,12 @@
 
                                 <form method="post" action="unreport_comments.php" class="delete_form col-xs-3">
                                     <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                    <input type="submit" name="valider" class="update btn btn-xs" value="Laisser"/>
+                                    <input type="submit" name="unreportComment" class="update btn btn-xs" value="Laisser"/>
                                 </form>
 
-                                <form method="post" action="delete_comments.php" class="delete_form col-xs-3">
+                                <form method="post" action="" class="delete_form col-xs-3">
                                     <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                    <input type="submit" name="valider" class="delete btn btn-xs" value="Supprimer"/>
+                                    <input type="submit" name="deleteComment" class="delete btn btn-xs" value="Supprimer"/>
                                 </form>
                             
                             </div>

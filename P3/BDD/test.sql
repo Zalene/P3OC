@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 06 mars 2019 à 07:03
+-- Généré le :  mer. 13 mars 2019 à 05:49
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `billets` (
   `contenu` text NOT NULL,
   `date_creation` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `billets`
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `commentaires` (
   `report` int(11) NOT NULL,
   `date_commentaire` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commentaires`
@@ -102,8 +102,7 @@ INSERT INTO `commentaires` (`id`, `id_billet`, `auteur`, `commentaire`, `report`
 (38, 27, 'Jean Forteroche', 'adadqsdqdqd', 0, '2019-02-27 07:39:07'),
 (39, 27, 'Jean Forteroche', '123', 0, '2019-02-28 15:10:05'),
 (40, 27, 'Jean Forteroche', '456', 0, '2019-02-28 15:10:10'),
-(41, 27, 'Jean Forteroche', '789', 0, '2019-02-28 15:10:14'),
-(42, 27, 'Jean Forteroche', '741', 0, '2019-02-28 15:10:20');
+(41, 27, 'Jean Forteroche', '789', 0, '2019-02-28 15:10:14');
 
 -- --------------------------------------------------------
 
@@ -120,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `membres` (
   `pass` varchar(255) NOT NULL,
   `date_inscription` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `membres`
@@ -128,8 +127,7 @@ CREATE TABLE IF NOT EXISTS `membres` (
 
 INSERT INTO `membres` (`id`, `id_groupe`, `pseudo`, `email`, `pass`, `date_inscription`) VALUES
 (5, 2, 'Zalene', 'bastien_gau@hotmail.fr', '$2y$10$h/rK5TzgNNm1R2KxDa7cK.44YgD84hYZ/TLukJU6hf40yY1q3FBnq', '2019-02-20'),
-(6, 1, 'Jean Forteroche', 'bastien.gau@gmail.com', '$2y$10$qLrTUixzZyW3Z9k5DTbWvu4IN27N1.iw4Hd2srO9DrLuzfTH59Vka', '2019-02-25'),
-(4, 2, 'Baba', 'hdoj@lkhgsd.fr', '$2y$10$wayZDXSF2.VciHwvjYcdW.A52aquq.luYmeTenVZgxceqbDUZHklO', '2019-02-20');
+(6, 1, 'Jean Forteroche', 'bastien.gau@gmail.com', '$2y$10$qLrTUixzZyW3Z9k5DTbWvu4IN27N1.iw4Hd2srO9DrLuzfTH59Vka', '2019-02-25');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

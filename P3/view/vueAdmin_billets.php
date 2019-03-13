@@ -20,11 +20,28 @@
 
     $req = $bdd->query("SELECT id, titre, contenu FROM billets WHERE id= $id_el");
     $donnees = $req->fetch();
+
+ 
+
+    if(isset($_POST['button_billet'])){
+        $id_el = $_POST['id'];
+        $title = $_POST['titre'];
+        $content = $_POST['contenu'];
+
+        $sth = $bdd->prepare('UPDATE billets SET titre = :title, contenu = :content WHERE id = :id'); 
+        $sth->bindValue(':title', $title, PDO::PARAM_STR); 
+        $sth->bindValue(':content', $content, PDO::PARAM_STR);
+        $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
+        $sth->execute();
+
+        header('Location: ?action=article&billet='. $id_el .' ');
+    }
+   
     ?> 
 
         <!-- MODIFICATION D'UN ARTICLE -->
         <div id="formulaire_connexion" class="container">
-            <form method='POST' action='update_billet_post.php' class="form-horizontal">
+            <form method='POST' action='' class="form-horizontal">
             <fieldset>
 
             <!-- Text input-->
@@ -58,8 +75,7 @@
     </div>
 
     <?php
-    var_dump($id_el);
-    die;
+
     include("includes/footer.php"); ?>
 
 </body>

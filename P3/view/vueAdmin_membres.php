@@ -26,7 +26,15 @@
                     </thead>
                     <tbody>
 
-                    <?php 
+                    <?php
+                    if(isset($_POST['deleteMember'])) {
+                        $id_member = $_POST['id'];
+
+                        $bdd->query("DELETE FROM membres WHERE id= $id_member");
+                        ?>
+                            <meta http-equiv="refresh" content="1; url=<?php echo $_SERVER["HTTP_REFERER"]  ; ?>" />
+                        <?php
+                    }
                     while($donnees = $adminMembers->fetch())
                     {
                     ?>
@@ -35,9 +43,9 @@
                             <td><?php echo $donnees['email']; ?></td>
                             <td><?php echo $donnees['date_inscription_fr']; ?></td>
                             <td>    
-                                <form method="post" action="delete_members.php" class="delete_form">
+                                <form method="post" action="" class="delete_form">
                                     <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                    <input type="submit" name="valider" class="delete btn btn-xs" value="Supprimer"/>
+                                    <input type="submit" name="deleteMember" class="delete btn btn-xs" value="Supprimer"/>
                                 </form>
                             </td>
                         </tr>

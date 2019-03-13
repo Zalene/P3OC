@@ -46,7 +46,7 @@
 
 
         <div id="formulaire_connexion" class="container">
-            <form method="POST" action="connexion.php" class="form-horizontal">
+            <form method="POST" action="" class="form-horizontal">
                 <fieldset>
 
                 <!-- Pseudo input-->

@@ -35,6 +35,14 @@ function commentaires() {
     require 'view/vueCommentaires.php';
 }
 
+function updateComment() {
+    require 'view/vueUpdateComment.php';
+}
+
+function mentionsLegales() {
+    require 'view/vueMentionsLegales.php';
+}
+
 // ADMIN
 // Création d'article
 function adminCreateBillet() {
@@ -42,7 +50,8 @@ function adminCreateBillet() {
 }
 
 function adminBillets() {
-    $updateBillet= getUpdateBillet();
+    $updateBillet = getUpdateBillet();
+    //$afterUpdateBillet = getAfterUpdateBillet();
     require 'view/vueAdmin_billets.php';
 }
 

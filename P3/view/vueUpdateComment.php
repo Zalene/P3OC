@@ -20,11 +20,27 @@
 
     $req = $bdd->query("SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el");
     $donnees = $req->fetch();
+
+    if(isset($_POST['updateButtonComment'])) {
+        $id_el = $_POST['id'];
+        $author = $_POST['auteur'];
+        $comment = $_POST['commentaire'];
+        $billet = $_POST['id_billet'];
+
+        $sth = $bdd->prepare('UPDATE commentaires SET auteur = :author, commentaire = :comment WHERE id = :id'); 
+        $sth->bindValue(':author', $author, PDO::PARAM_STR); 
+        $sth->bindValue(':comment', $comment, PDO::PARAM_STR);
+        $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
+        $sth->execute();
+
+        header('Location: index.php?action=article&billet= '. $billet .' ');
+    }
+
     ?> 
 
         <!-- MODIFICATION D'UN COMMENTAIRE -->
         <div id="formulaire_connexion" class="container">
-            <form method='POST' action='update_comments_post' class="form-horizontal">
+            <form method='POST' action='' class="form-horizontal">
             <fieldset>
                 
             <!-- Text input-->
@@ -49,7 +65,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="singlebutton"></label>
                     <div class="col-md-4">
-                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Modifier</button>
+                        <button id="singlebutton" name="updateButtonComment" class="btn btn-primary">Modifier</button>
                     </div>
             </div>
             </fieldset>

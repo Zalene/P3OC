@@ -19,6 +19,17 @@
             $req = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets WHERE id = ?');
             $req->execute(array($_GET['billet']));
             $donnees = $req->fetch();
+
+            if(isset($_POST['deleteBillet'])){
+                $id_el = $_POST['id'];
+
+                $bdd->query("DELETE FROM commentaires WHERE id_billet= $id_el");
+    
+                $bdd->query("DELETE FROM billets WHERE id= $id_el");
+
+                header('Location: index.php?action=blog');
+                exit();
+            }
             ?>
 
         <div id="news" class="container">
@@ -43,14 +54,14 @@
                         <div class="col-xs-offset-2 col-xs-1 col-sm-offset-4 col-sm-1">
                             <form method="post" action="index.php?action=updateBillet" class="update_form">
                                 <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                <input type="submit" name="valider" class="update btn btn-xs" value="Modifier"/>
+                                <input type="submit" name="update" class="update btn btn-xs" value="Modifier"/>
                             </form>
 
                         </div>    
                         <div class="col-xs-2 col-sm-1 pull-right">
-                            <form method="post" action="delete_billet.php" class="delete_form">
+                            <form method="post" action="" class="delete_form"> <!-- delete_billet.php -->
                                 <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                <input type="submit" name="valider" class="delete btn btn-xs" value="Supprimer"/>
+                                <input type="submit" name="deleteBillet" class="delete btn btn-xs" value="Supprimer"/>
                             </form>
                         </div>
                 <?php
@@ -71,8 +82,27 @@
             <?php
             $req->closeCursor();
 
+            if(isset($_POST['deleteComment'])){
+                $id_el = $_POST['id'];
 
-            while ($donnees = $listComments->fetch()) //$query
+                $bdd->query("DELETE FROM commentaires WHERE id= $id_el");
+                ?>
+                    <meta http-equiv="refresh" content="1; url=<?php echo $_SERVER["HTTP_REFERER"]  ; ?>" />
+                <?php
+            }
+
+            if(isset($_POST['reportComment'])){
+                $id_com = $_POST['id'];
+
+                $sth = $bdd->prepare('UPDATE commentaires SET report = 1 WHERE id = :id');
+                $sth->bindValue(':id', $id_com, PDO::PARAM_INT);
+                $sth->execute();
+                ?>
+                    <meta http-equiv="refresh" content="1; url=<?php echo $_SERVER["HTTP_REFERER"]  ; ?>" />
+                <?php
+            }
+
+            while ($donnees = $listComments->fetch())
             {
             ?>
             <div class="col-xs-12">
@@ -88,21 +118,21 @@
                         if($_SESSION['pseudo'] == $donnees['auteur'])
                         {
                         ?>
-                            <form method="post" action="update_comments.php" class="delete_form col-xs-3">
+                            <form method="post" action="index.php?action=updateComment" class="delete_form col-xs-3">
                                 <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                <input type="submit" name="valider" class="update btn btn-xs" value="Modifier"/>
+                                <input type="submit" name="updateComment" class="update btn btn-xs" value="Modifier"/>
                             </form>
 
-                            <form method="post" action="delete_comments.php" class="delete_form col-xs-3">
+                            <form method="post" action="" class="delete_form col-xs-3">
                                 <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                <input type="submit" name="valider" class="delete btn btn-xs" value="Supprimer"/>
+                                <input type="submit" name="deleteComment" class="delete btn btn-xs" value="Supprimer"/>
                             </form>
                         <?php
                         }
                         ?>
-                            <form method="post" action="report_comments.php" class="delete_form pull-right col-xs-3">
+                            <form method="post" action="" class="delete_form pull-right col-xs-3">
                                 <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                <input type="submit" name="valider" class="delete btn btn-xs btn-danger pull-right" value="Signaler"/>
+                                <input type="submit" name="reportComment" class="delete btn btn-xs btn-danger pull-right" value="Signaler"/>
                             </form>
                         </div>
                     <?php
@@ -137,9 +167,18 @@
             <?php
             if(isset($_SESSION['pseudo']))
             {
+                if(isset($_POST['postComment'])) {
+                    $id_billet = $_GET['billet'];
+
+                    $req = $bdd->prepare('INSERT INTO commentaires (id_billet, auteur, commentaire, report, date_commentaire) VALUES(?, ?, ?, 0, NOW())');
+                    $req->execute(array($id_billet, $_POST['auteur'], $_POST['commentaire']));
+                ?>
+                    <meta http-equiv="refresh" content="1; url=<?php echo $_SERVER["HTTP_REFERER"]  ; ?>" />
+                <?php
+                }
             ?>
             <div class="container formulaire-commentaire">
-                <form method='POST' action='commentaires_post.php?post=<?php echo $_GET['billet']; ?>' class="form-horizontal">
+                <form method='POST' action='' class="form-horizontal"> <!-- commentaires_post.php?post=<?php //echo $_GET['billet']; ?> -->
                     <fieldset>
 
                     <div class="form-group">
@@ -159,7 +198,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="singlebutton"></label>
                             <div class="col-md-4">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Envoyer</button>
+                                <button id="singlebutton" name="postComment" class="btn btn-primary">Envoyer</button>
                             </div>
                     </div>
                     </fieldset>

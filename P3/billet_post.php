@@ -6,5 +6,5 @@ $req = $bdd->prepare('INSERT INTO billets (titre, contenu, date_creation) VALUES
 $req->execute(array($_POST['titre'], $_POST['contenu']));
 
 // Puis rediriger vers blog.php comme ceci :
-header('Location: blog.php');
+header('Location: index.php?action=blog');
 ?>

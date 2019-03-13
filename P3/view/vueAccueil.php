@@ -24,7 +24,7 @@
                     // Lien pour le contenu du billet
                     nl2br(htmlspecialchars($donnees['contenu']));
                     ?>
-                    <em><a href="commentaires.php?billet=<?php echo $donnees['id']; ?>"  class="btn btn-lg btn-default">Voir l'article<span class="glyphicon glyphicon-chevron-right"></span></a></em>
+                    <em><a href="?action=article&amp;billet=<?php echo $donnees['id']; ?>"  class="btn btn-lg btn-default">Voir l'article<span class="glyphicon glyphicon-chevron-right"></span></a></em>
                     </p>
                 </div>
                 <?php

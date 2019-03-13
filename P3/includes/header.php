@@ -10,9 +10,9 @@
                 </li>
                 <li><a href="index.php?action=blog">Blog</a>
                 </li>
-                <li><a href="bio.php">Biographie</a>
+                <li><a href="index.php?action=bio">Biographie</a>
                 </li>
-                <li><a href="index.php #formulaire_contact">Contact</a>
+                <li><a href="index.php?action=contact#formulaire_contact">Contact</a>
                 </li>
                 <?php
                 require 'includes/functionsSQL.php';
@@ -31,11 +31,11 @@
                 ?>
                         <li><a><?php echo $_SESSION['pseudo'] ?> <span class="fa fa-caret-down"></span></a>
                             <ul class="dropdown">
-                                <li><a href="admin.php">Création d'article</a></li>
+                                <li><a href="index.php?action=createBillet">Création d'article</a></li>
                                 <!--<li><a href="#">Modification d'article</a></li>-->
-                                <li><a href="admin_comments.php">Commentaires</a></li>
-                                <li><a href="#">Membres</a></li>
-                                <li><a href="#">Changer de mot de passe</a></li>
+                                <li><a href="index.php?action=adminComments">Commentaires</a></li>
+                                <li><a href="index.php?action=adminMembers">Membres</a></li>
+                                <li><a href="index.php?action=changePassword">Changer de mot de passe</a></li>
                                 <li><a href="deconnexion.php">Déconnexion</a></li>
                             </ul>
                         </li>
@@ -46,7 +46,7 @@
                 ?>
                         <li><a><?php echo $_SESSION['pseudo'] ?> <span class="fa fa-caret-down"></span></a>
                             <ul class="dropdown">
-                                <li><a href="#">Changer de mot de passe</a></li>
+                                <li><a href="changement_mdp.php">Changer de mot de passe</a></li>
                                 <li><a href="deconnexion.php">Déconnexion</a></li>
                             </ul>
                         </li>
@@ -56,7 +56,7 @@
                 else
                 {
                 ?>
-                    <li><a href="connexion.php">Connexion</a>
+                    <li><a href="index.php?action=connexion">Connexion</a>
                     </li>
                 <?php
                 }

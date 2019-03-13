@@ -2,15 +2,14 @@
 
 require 'Modele/Modele.php';
 
-// Affiche la liste du dernier billet du blog
 function accueil() {
+    // Affiche le dernier billet du blog
     $lastBillet = getLastBillet();
     require 'view/vueAccueil.php';
 }
 
 function blog() {
-    //$PaginationBlog = getPaginationBlog();
-    //$NbPagesBlog = getNbPagesBlog();
+    $PaginationBlog = getPaginationBlog();
     require 'view/vueBlog.php';
 }
 
@@ -20,7 +19,7 @@ function biographie() {
 
 function contact() {
     $lastBillet = getLastBillet();
-    require 'view/vueAccueil.php'; //Voir pour être sur le bas de la page d'accueil
+    require 'view/vueAccueil.php';
 }
 
 function connexion() {
@@ -30,20 +29,34 @@ function connexion() {
 function inscription() {
     require 'view/vueInscription.php';
 }
-
-// Création d'article
-function administration() {
-    require 'view/vueAdmin.php';
+function commentaires() {
+    $buttonAdminBillet = getButtonBillet ();
+    $listComments = getListComments ();
+    require 'view/vueCommentaires.php';
 }
 
-function signalerCommentaire() {
+// ADMIN
+// Création d'article
+function adminCreateBillet() {
+    require 'view/vueCreateBillet.php';
+}
+
+function adminBillets() {
+    $updateBillet= getUpdateBillet();
+    require 'view/vueAdmin_billets.php';
+}
+
+function adminComments() {
+    $reportedComments = getReportedComments();
     require 'view/vueAdmin_comments.php';
 }
 
-function adminMembres() {
+function adminMembers() {
+    $adminMembers = getAdminMembers();
     require 'view/vueAdmin_membres.php';
 }
 
-function changerMdP() {
+function changePassword() {
+    //$changePassword = getChangePassword();
     require 'view/vueMdP.php';
 }

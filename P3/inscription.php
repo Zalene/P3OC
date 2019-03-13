@@ -42,7 +42,7 @@
                             if($passwordlength >= 8)
                             {
                                 if($password == $password2)
-                                {
+                                {   
                                     $req = $bdd->prepare('INSERT INTO membres(id_groupe, pseudo, email, pass, date_inscription) VALUES (2, :pseudo, :email, :pass, CURDATE())');
                                     $req->execute(array(
                                         'pseudo' => $pseudo,

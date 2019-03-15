@@ -35,7 +35,6 @@
 
         header('Location: index.php?action=article&billet= '. $billet .' ');
     }
-
     ?> 
 
         <!-- MODIFICATION D'UN COMMENTAIRE -->

@@ -13,13 +13,10 @@
             <h1 class="title-blog col-xs-12">CREATION D'ARTICLE</h1>
             <div class="barre_separation col-xs-offset-5 col-xs-2"></div>
         </div>
-    <?php
-    include 'includes/functionsSQL.php';
-    ?>
-
+ 
         <!-- CREATION D'UN ARTICLE -->
         <div id="formulaire_connexion" class="container">
-            <form method='POST' action='billet_post.php' class="form-horizontal">
+            <form method='POST' action='' class="form-horizontal">
             <fieldset>
 
             <!-- Text input-->

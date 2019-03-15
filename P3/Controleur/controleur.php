@@ -9,7 +9,11 @@ function accueil() {
 }
 
 function blog() {
-    $PaginationBlog = getPaginationBlog();
+    $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+    $limite = 5;
+    $debut = ($page - 1) * $limite;
+
+    $PaginationBlog = getPaginationBlog($page, $limite, $debut);
     require 'view/vueBlog.php';
 }
 
@@ -36,6 +40,7 @@ function commentaires() {
 }
 
 function updateComment() {
+    $updateComment = getUpdateComment();
     require 'view/vueUpdateComment.php';
 }
 
@@ -46,8 +51,9 @@ function mentionsLegales() {
 // ADMIN
 // Création d'article
 function adminCreateBillet() {
+    $createBillet = getCreateBillet();
     require 'view/vueCreateBillet.php';
-}
+}//MVC FINI
 
 function adminBillets() {
     $updateBillet = getUpdateBillet();

@@ -2,7 +2,7 @@
 
 //CONNEXION A LA BDD
 function getDbConnect() {
-    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $bdd = new PDO('mysql:host=localhost;dbname=db_p3_jean_f;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     return $bdd;
 }
 
@@ -15,19 +15,24 @@ function getLastBillet() {
 }
 
 //FUNCTION BLOG
-function getPaginationBlog() {
+function getPaginationBlog($page, $limite, $debut) {
     $bdd = getDbConnect();
 
     // On récupère 5 billets par page
-    $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
-    $limite = 5;
+    //$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+    //$limite = 5;
     
     $debut = ($page - 1) * $limite;
     $query = 'SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite';
     $query = $bdd->prepare($query);
-    $query->bindValue('limite', $limite, PDO::PARAM_INT);
-    $query->bindValue('debut', $debut, PDO::PARAM_INT);
+    $query->bindValue(':limite', $limite, PDO::PARAM_INT);
+    $query->bindValue(':debut', $debut, PDO::PARAM_INT);
     $query->execute();
+
+    //$b=$bdd->prepare('SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite');
+    //$b->bindParam(":limite", $limite, PDO::PARAM_INT); 
+    //$b->bindParam(":debut", $debut, PDO::PARAM_INT); 
+    //$b->execute();
 
     $resultFoundRows = $bdd->query('SELECT found_rows()');
 
@@ -36,6 +41,9 @@ function getPaginationBlog() {
     // Calcule du nombre de pages
     $nombreDePages = ceil($nombredElementsTotal / $limite);
     
+    //var_dump($nombreDePages);
+    //die;
+
     return $query;
 }
 
@@ -79,6 +87,38 @@ function getListComments() {
     return $query;
 }
 
+function getUpdateComment() {
+    $bdd = getDbConnect();
+
+    $id_el = $_POST['id'];
+
+    $req = $bdd->query("SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el");
+    $donnees = $req->fetch();
+
+    //var_dump($donnees['auteur']);
+    //die;
+
+    return $req;
+}
+
+function getUpdateCommentPost() {
+    $bdd = getDbConnect();
+
+    if(isset($_POST['updateButtonComment'])) {
+        $id_el = $_POST['id'];
+        $author = $_POST['auteur'];
+        $comment = $_POST['commentaire'];
+        $billet = $_POST['id_billet'];
+
+        $sth = $bdd->prepare('UPDATE commentaires SET auteur = :author, commentaire = :comment WHERE id = :id'); 
+        $sth->bindValue(':author', $author, PDO::PARAM_STR); 
+        $sth->bindValue(':comment', $comment, PDO::PARAM_STR);
+        $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
+        $sth->execute();
+
+        header('Location: index.php?action=article&billet= '. $billet .' ');
+    }
+}
 
 //FUNCTION CONTACT
 
@@ -126,6 +166,19 @@ function getAdminMembers() {
     $query = $bdd->prepare($query);
     $query->execute();
     return $query;
+}
+
+function getCreateBillet() {
+    $bdd = getDbConnect();
+
+    if(isset($_POST['button_billet'])) {
+        $req = $bdd->prepare('INSERT INTO billets (titre, contenu, date_creation) VALUES(?, ?, NOW())');
+        $req->execute(array($_POST['titre'], $_POST['contenu']));
+
+        header('Location: index.php?action=blog');
+
+        return $req;
+    }
 }
 
 function getChangePassword() {

@@ -39,6 +39,9 @@
                     $page = getPaginationBlog();
                     $nombreDePages = getPaginationBlog();
 
+                    var_dump($PaginationBlog);
+                    die;
+
                     if ($page > 1):
                     ?><a href="?action=blog&amp;page=<?php echo $page - 1; ?>">Page précédente</a> — <?php
                     endif;
@@ -51,6 +54,8 @@
                     if ($page < $nombreDePages):
                         ?>— <a href="?action=blog&amp;page=<?php echo $page + 1; ?>">Page suivante</a><?php
                     endif;
+                    var_dump($nombreDePages);
+                    die;
                 ?>
             </div>
     </div>

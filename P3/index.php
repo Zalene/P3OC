@@ -19,10 +19,10 @@ try {
             inscription();
         }
         elseif ($_GET['action'] == 'article') {
-            commentaires();
+            billet();
         }
         elseif ($_GET['action'] == 'updateBillet') {
-            adminBillets();
+            adminUpdateBillets();
         }
         elseif ($_GET['action'] == 'updateComment') {
             updateComment();

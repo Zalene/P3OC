@@ -148,18 +148,18 @@
         <div class="container">
                 <?php
                 /* Calcule du nombre de pages */
-                $nombreDePages = ceil($nombredElementsTotal / $limite);
+                //$nombreDePages = ceil($nombredElementsTotal / $limite);
 
                 if ($page > 1):
                     ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $page - 1; ?>#list_commentaires">Page précédente</a> — <?php
                 endif;
 
                 /* On effectue une boucle autant de fois que l'on a de pages */
-                for ($i = 1; $i <= $nombreDePages; $i++):
+                for ($i = 1; $i <= $pageNum; $i++):
                     ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $i; ?>#list_commentaires"><?php echo $i; ?></a> <?php
                 endfor;
 
-                if ($page < $nombreDePages):
+                if ($page < $pageNum):
                     ?>— <a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $page + 1; ?>#list_commentaires">Page suivante</a><?php
                 endif;
                 ?>

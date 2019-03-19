@@ -15,37 +15,41 @@ function getLastBillet() {
 }
 
 //FUNCTION BLOG
-function getPaginationBlog($page, $limite, $debut) {
+function getChapters($page, $limite) {
     $bdd = getDbConnect();
-
-    // On récupère 5 billets par page
-    //$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
-    //$limite = 5;
     
     $debut = ($page - 1) * $limite;
     $query = 'SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite';
     $query = $bdd->prepare($query);
-    $query->bindValue(':limite', $limite, PDO::PARAM_INT);
-    $query->bindValue(':debut', $debut, PDO::PARAM_INT);
+    $query->bindValue('limite', $limite, PDO::PARAM_INT);
+    $query->bindValue('debut', $debut, PDO::PARAM_INT);
     $query->execute();
 
-    //$b=$bdd->prepare('SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite');
-    //$b->bindParam(":limite", $limite, PDO::PARAM_INT); 
-    //$b->bindParam(":debut", $debut, PDO::PARAM_INT); 
-    //$b->execute();
+    //$resultFoundRows = $bdd->query('SELECT found_rows()');
 
-    $resultFoundRows = $bdd->query('SELECT found_rows()');
-
-    $nombredElementsTotal = $resultFoundRows->fetchColumn();
+    //$nombredElementsTotal = $resultFoundRows->fetchColumn();
     
     // Calcule du nombre de pages
-    $nombreDePages = ceil($nombredElementsTotal / $limite);
-    
-    //var_dump($nombreDePages);
-    //die;
+    //$nombreDePages = ceil($nombredElementsTotal / $limite);
 
     return $query;
 }
+function getPagination($page, $limite){
+    //$bdd = getDbConnect();
+    //$query = $bdd->query('SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite');
+    //$resultFoundRows = $bdd->query('SELECT found_rows()');
+
+    //$nombredElementsTotal = $resultFoundRows->fetchColumn();
+    
+    // Calcule du nombre de pages
+    //$nombreDePages = ceil($nombredElementsTotal / $limite);
+
+    $pageNum = 5;
+    return $pageNum;
+}
+
+
+
 
 //FUNCTION ARTICLES ET COMMENTAIRES
 function getViewBillet() {
@@ -66,12 +70,11 @@ function getButtonBillet() {
     return $req;
 }
 
-function getListComments() {
+function getListComments($page, $limite) {
     $bdd = getDbConnect();
 
     // Récupération des commentaires
-    $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
-    $limite = 5;
+    
 
     $debut = ($page - 1) * $limite;
     $query = 'SELECT SQL_CALC_FOUND_ROWS id, auteur, commentaire, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %H:%i\') AS date_commentaire_fr FROM commentaires WHERE id_billet = :billet ORDER BY date_commentaire DESC LIMIT :debut, :limite';
@@ -124,32 +127,28 @@ function getUpdateCommentPost() {
 
 
 //FUNCTION ADMIN
-function getUpdateBillet() {
+function getUpdateBillet($id_el) {
     $bdd = getDbConnect();
-    $id_el = $_POST['id'];
 
     $req = $bdd->query("SELECT id, titre, contenu FROM billets WHERE id= $id_el");
-    $donnees = $req->fetch();
     return $req;
 }
 
-function getAfterUpdateBillet() {
+function getPushUpdateBillet($id_el) {
     $bdd = getDbConnect();
 
-    $id_el = $_POST['id'];
-    $title = $_POST['titre'];
-    $content =$_POST['contenu'];
+    if(isset($_POST['button_billet'])) {
+        $title = $_POST['titre'];
+        $content = $_POST['contenu'];
 
-    $sth = $bdd->prepare('UPDATE billets SET titre = :title, contenu = :content WHERE id = :id'); 
-    $sth->bindValue(':title', $title, PDO::PARAM_STR); 
-    $sth->bindValue(':content', $content, PDO::PARAM_STR);
-    $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
-    $sth->execute();
+        $sth = $bdd->prepare('UPDATE billets SET titre = :title, contenu = :content WHERE id = :id'); 
+        $sth->bindValue(':title', $title, PDO::PARAM_STR); 
+        $sth->bindValue(':content', $content, PDO::PARAM_STR);
+        $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
+        $sth->execute();
 
-    // Puis rediriger vers blog.php comme ceci :
-    header('Location: commentaires.php?billet= '. $id_el .' ');
-
-    return $sth;
+        header('Location: index.php?action=article&billet= '. $id_el .' ');
+    }
 }
 
 function getReportedComments() {

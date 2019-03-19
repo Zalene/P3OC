@@ -9,11 +9,13 @@ function accueil() {
 }
 
 function blog() {
+    // On récupère 5 billets par page
     $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
     $limite = 5;
-    $debut = ($page - 1) * $limite;
 
-    $PaginationBlog = getPaginationBlog($page, $limite, $debut);
+    $PaginationBlog = getChapters($page, $limite);
+
+    $pageNum = getPagination($page, $limite);
     require 'view/vueBlog.php';
 }
 
@@ -33,10 +35,14 @@ function connexion() {
 function inscription() {
     require 'view/vueInscription.php';
 }
-function commentaires() {
+function billet() {
+    $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+    $limite = 5;
+
     $buttonAdminBillet = getButtonBillet ();
-    $listComments = getListComments ();
-    require 'view/vueCommentaires.php';
+    $listComments = getListComments ($page, $limite);
+    $pageNum = getPagination($page, $limite);
+    require 'view/vueBillet.php';
 }
 
 function updateComment() {
@@ -55,10 +61,12 @@ function adminCreateBillet() {
     require 'view/vueCreateBillet.php';
 }//MVC FINI
 
-function adminBillets() {
-    $updateBillet = getUpdateBillet();
-    //$afterUpdateBillet = getAfterUpdateBillet();
-    require 'view/vueAdmin_billets.php';
+function adminUpdateBillets() {
+    $id_el = $_POST['id'];
+
+    $updateBillet = getUpdateBillet($id_el);
+    $pushUpdateBillet = getPushUpdateBillet($id_el);
+    require 'view/vueAdminUpdateBillets.php';
 }
 
 function adminComments() {

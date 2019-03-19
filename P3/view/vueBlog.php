@@ -36,26 +36,23 @@
             ?>
             <div class="container">
                 <?php
-                    $page = getPaginationBlog();
-                    $nombreDePages = getPaginationBlog();
-
-                    var_dump($PaginationBlog);
-                    die;
-
-                    if ($page > 1):
+                    
+                    if ($page > 1){
                     ?><a href="?action=blog&amp;page=<?php echo $page - 1; ?>">Page précédente</a> — <?php
-                    endif;
+                    }
 
                     // On effectue une boucle autant de fois que l'on a de pages
-                    for ($i = 1; $i <= $nombreDePages; $i++):
+                    for ($i = 1; $i <= $pageNum; $i++){
                         ?><a href="?action=blog&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
-                    endfor;
+                    }
 
-                    if ($page < $nombreDePages):
+                    if ($page < $pageNum){
                         ?>— <a href="?action=blog&amp;page=<?php echo $page + 1; ?>">Page suivante</a><?php
-                    endif;
-                    var_dump($nombreDePages);
+                    }
+
+                    var_dump($pageNum);
                     die;
+
                 ?>
             </div>
     </div>

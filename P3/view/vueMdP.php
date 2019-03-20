@@ -72,7 +72,7 @@
         ?>
 
         <div id="formulaire_connexion" class="container">
-            <form method="POST" action="#" class="form-horizontal">
+            <form method="POST" action="" class="form-horizontal">
                 <fieldset>
 
                 <!-- Old Password input-->

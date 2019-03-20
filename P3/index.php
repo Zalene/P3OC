@@ -18,6 +18,9 @@ try {
         elseif ($_GET['action'] == 'inscription') {
             inscription();
         }
+        elseif ($_GET['action'] == 'deconnexion') {
+            deconnexion();
+        }
         elseif ($_GET['action'] == 'article') {
             billet();
         }

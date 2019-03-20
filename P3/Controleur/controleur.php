@@ -14,7 +14,6 @@ function blog() {
     $limite = 5;
 
     $PaginationBlog = getChapters($page, $limite);
-
     $pageNum = getPagination($page, $limite);
     require 'view/vueBlog.php';
 }
@@ -29,18 +28,31 @@ function contact() {
 }
 
 function connexion() {
+    //$connexion = getConnexion();
     require 'view/vueConnexion.php';
 }
 
 function inscription() {
+    $inscription = getInscription ();
     require 'view/vueInscription.php';
 }
 function billet() {
     $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
     $limite = 5;
+    $id_billet = $_GET['billet'];
 
+    //Billet
+    $viewBillet = getViewBillet($id_billet);
+    $deleteBillet = getDeleteBillet();
     $buttonAdminBillet = getButtonBillet ();
+
+    //Comments
+    $deleteComment = getDeleteComment($id_billet);
+    $reportComment = getReportComment($id_billet);
     $listComments = getListComments ($page, $limite);
+    $postComment = getPostComment($id_billet);
+
+    //Pagination
     $pageNum = getPagination($page, $limite);
     require 'view/vueBillet.php';
 }
@@ -55,11 +67,10 @@ function mentionsLegales() {
 }
 
 // ADMIN
-// Création d'article
 function adminCreateBillet() {
     $createBillet = getCreateBillet();
     require 'view/vueCreateBillet.php';
-}//MVC FINI
+}
 
 function adminUpdateBillets() {
     $id_el = $_POST['id'];
@@ -70,16 +81,23 @@ function adminUpdateBillets() {
 }
 
 function adminComments() {
-    $reportedComments = getReportedComments();
-    require 'view/vueAdmin_comments.php';
+    $unreportComment = getAdminUnreportComment();
+    $deleteComment = getAdminDeleteComment();
+    $reportedComments = getAdminReportedComments();
+    require 'view/vueAdminComments.php';
 }
 
 function adminMembers() {
+    $deleteMembers = getAdminDeleteMembers();
     $adminMembers = getAdminMembers();
-    require 'view/vueAdmin_membres.php';
+    require 'view/vueAdminMembres.php';
 }
 
 function changePassword() {
     //$changePassword = getChangePassword();
     require 'view/vueMdP.php';
+}
+
+function deconnexion() {
+    $deconnexion = getDeconnexion();
 }

@@ -32,11 +32,10 @@
                         <li><a><?php echo $_SESSION['pseudo'] ?> <span class="fa fa-caret-down"></span></a>
                             <ul class="dropdown">
                                 <li><a href="index.php?action=createBillet">Création d'article</a></li>
-                                <!--<li><a href="#">Modification d'article</a></li>-->
                                 <li><a href="index.php?action=adminComments">Commentaires</a></li>
                                 <li><a href="index.php?action=adminMembers">Membres</a></li>
                                 <li><a href="index.php?action=changePassword">Changer de mot de passe</a></li>
-                                <li><a href="index.php?action=deconnexion">Déconnexion</a></li><!-- deconnexion.php -->
+                                <li><a href="index.php?action=deconnexion">Déconnexion</a></li>
                             </ul>
                         </li>
                 <?php

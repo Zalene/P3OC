@@ -12,39 +12,6 @@
             <div class="barre_separation col-xs-offset-4 col-xs-4 col-md-offset-5 col-md-2"></div>
         </div>
 
-        <?php
-        include 'includes/functionsSQL.php';   
-
-        if(isset($_POST['connexion_member']))
-        {
-            $pseudo = htmlspecialchars(trim($_POST['pseudo']));
-            $password = trim($_POST['password']);
-            
-            if(!empty($pseudo) AND !empty($password))
-            {
-                $reqpseudo = $bdd->prepare('SELECT * FROM membres WHERE pseudo = ?');
-                $reqpseudo->execute(array($pseudo));
-                $pseudoexiste = $reqpseudo->rowcount();
-                while ($row = $reqpseudo->fetch()) { $passwordbdd=$row['pass']; }
-
-                if($password == password_verify($password, $passwordbdd))
-                {
-                    $_SESSION['pseudo'] = $pseudo;
-
-                    if(isset($_SESSION['pseudo']))
-                    {
-                        header("location:index.php");
-                    }
-                }
-                else
-                {
-                    $erreur = "Mauvais identifiant ou mot de passe !";
-                }
-            }
-        }
-        ?>
-
-
         <div id="formulaire_connexion" class="container">
             <form method="POST" action="" class="form-horizontal">
                 <fieldset>

@@ -9,7 +9,6 @@
             </div>
             <div class="row">
                 <?php
-
                 while ($donnees = $lastBillet->fetch())
                 {
                 ?>

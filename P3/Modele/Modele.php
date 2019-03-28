@@ -9,6 +9,7 @@ function getDbConnect() {
 //FUNCTION ACCUEIL
 function getLastBillet() {
     $bdd = getDbConnect();
+
     // On récupère le dernier billet
     $lastBillet = $bdd->query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 0, 1');
     return $lastBillet;
@@ -36,7 +37,13 @@ function getChapters($page, $limite) {
 }
 function getPagination($page, $limite){
     //$bdd = getDbConnect();
+
     //$query = $bdd->query('SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite');
+    //$query = $bdd->prepare($query);
+    //$query->bindValue('limite', $limite, PDO::PARAM_INT);
+    //$query->bindValue('debut', $debut, PDO::PARAM_INT);
+    //$query->execute();
+
     //$resultFoundRows = $bdd->query('SELECT found_rows()');
 
     //$nombredElementsTotal = $resultFoundRows->fetchColumn();
@@ -230,7 +237,7 @@ function getAdminReportedComments() {
 function getAdminMembers() {
     $bdd = getDbConnect();
 
-    $query = 'SELECT id, pseudo, email, DATE_FORMAT(date_inscription, \'%d/%m/%Y\') AS date_inscription_fr FROM membres WHERE id ORDER BY date_inscription';
+    $query = 'SELECT id, pseudo, email, DATE_FORMAT(date_inscription, \'%d/%m/%Y\') AS date_inscription_fr FROM membres WHERE id_groupe = 2 ORDER BY date_inscription';
     $query = $bdd->prepare($query);
     $query->execute();
     return $query;
@@ -282,10 +289,7 @@ function getConnexion() {
 
                 if(isset($_SESSION['pseudo']))
                 {
-                    var_dump($pseudo);
-                    var_dump($password);
-                    die;
-                    //header("location:index.php");
+                    header("location:index.php");
                 }
             }
             else

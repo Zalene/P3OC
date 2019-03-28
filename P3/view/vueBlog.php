@@ -19,15 +19,22 @@
             ?>
             <div id="news-article" class="container">
                 <a href="?action=article&amp;billet=<?php echo $donnees['id']; ?>" id="title-article"><h3><?php echo html_entity_decode($donnees['titre']); ?></h3></a>
-                
-                <p id="contenu-article"><?php
-                // On affiche le contenu du billet
-                echo nl2br(html_entity_decode($donnees['contenu']));
+
+                <p id="contenu-article">
+                <?php
+                $description = $donnees['contenu'];
+                if (strlen($description) > 900) {
+                    $apercu_description =  substr($description, 0, 900);
+                    echo  $apercu_description .". . ." ;
+                }
+                else{
+                    echo $description ;
+                }
                 ?>
                 </p>
                 <div class="col-xs-12">
-                    <em id="date-article" class="btn btn-primary btn-sm col-xs-5 col-sm-4 col-md-3 col-lg-2"><span class="fas fa-calendar-alt"></span> <?php echo $donnees['date_creation_fr']; ?></em>
-                    <a href="?action=article&amp;billet=<?php echo $donnees['id']; ?>" id="commentaire-article" class="btn btn-primary btn-lg col-xs-6 col-sm-5 col-md-3 col-lg-2 pull-right"><span class="far fa-comments"> Commentaires</span></a>    
+                    <em id="date-article" class="col-xs-5 col-sm-4 col-md-3 col-lg-2"><span class="fas fa-calendar-alt"></span> <?php echo $donnees['date_creation_fr']; ?></em>
+                    <a href="?action=article&amp;billet=<?php echo $donnees['id']; ?>" id="commentaire-article" class="btn btn-primary btn-md col-xs-6 col-sm-5 col-md-3 col-lg-2 pull-right"><span class="far fa-comments"> Commentaires</span></a>    
                 </div>
             </div>
             <?php

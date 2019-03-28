@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'Controleur/controleur.php';
 
 try {

@@ -24,10 +24,10 @@
             
             <div class="bio_contenu">
                 <p class="col-xs-12">Jean Forteroche est né en 1965 en Bourgogne, il y a passé une grande partie de son enfance avant de s'installer à Toulon.<br>
-                Il a écrit son premier roman <em>LE SAPHIR</em> lors d'une rencontre avec un sous-marinier en 2013.<br>
+                Il a écrit son premier roman <em>A LA PLACE DE L'AUTRE</em> lors d'une rencontre avec un sous-marinier en 2013.<br>
                 Après avoir connu un succès fulgurant, il décide de venir s'installer dans le sud de la France ou il a trouver l'inspiration pour sont premier roman.<br>
-                En 2015, il publie <em>LES ORPHELINS DE GIBRALTAR</em> récit d'un jeune migrant qui fuyait l'Afrique pour rejoindre un nouveau départ symbolisé par l'Europe.<br>
-                Ce livre fait partie de la liste des best-sellers. Publié en France en mars 2015, <em>LES ORPHELINS DE GIBRALTAR</em> remporte un immense succès ainsi que de nombreux prix et c'est vendu à plus de 400 000 exemplaires.<br>
+                En 2015, il publie <em>UN JEUNE HOMME D'HONNEUR</em> récit d'un jeune migrant qui fuyait l'Afrique pour rejoindre un nouveau départ symbolisé par l'Europe.<br>
+                Ce livre fait partie de la liste des best-sellers. Publié en France en mars 2015, <em>UN JEUNE HOMME D'HONNEUR</em> remporte un immense succès ainsi que de nombreux prix et c'est vendu à plus de 400 000 exemplaires.<br>
                 <br>
                 Porté par son succès, Jean Forteroche est aujourd'hui traduit en vingt langues dans plus de cinquante pays. Une adaptation cinématographique est en cours pour sont premier roman.<br>
                 <br>
@@ -47,9 +47,9 @@
             <div class="barre_separation col-xs-offset-4 col-xs-4 col-md-offset-5 col-md-2"></div>
 
             <div class="block_roman col-xs-12">
-                <img class="img_roman col-xs-12 col-sm-4 col-md-4" src="public/img/forteroche.jpg" alt="Roman - Le Saphir">
-                <img class="img_roman col-xs-12 col-sm-4 col-md-4" src="public/img/forteroche.jpg" alt="Roman - Les Orphelins de Gibraltar">
-                <img class="img_roman col-xs-12 col-sm-4 col-md-4" src="public/img/forteroche.jpg" alt="Roman - Billet simple pour l'Alaska">
+                <img class="img_roman col-xs-12 col-sm-4 col-md-4" src="public/img/livre01.jpg" alt="Roman - A la place de l'autre">
+                <img class="img_roman col-xs-12 col-sm-4 col-md-4" src="public/img/livre03.jpg" alt="Roman - Un jeune homme d'honneur">
+                <img class="img_roman col-xs-12 col-sm-4 col-md-4" src="public/img/livre02.jpg" alt="Roman - Billet simple pour l'Alaska">
             </div>    
         </div>
     </section>

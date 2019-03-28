@@ -1,6 +1,6 @@
 <?php
 
-require 'Modele/Modele.php';
+require 'Modele/modele.php';
 
 function accueil() {
     // Affiche le dernier billet du blog
@@ -12,6 +12,7 @@ function blog() {
     // On récupère 5 billets par page
     $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
     $limite = 5;
+    //$debut = ($page - 1) * $limite;
 
     $PaginationBlog = getChapters($page, $limite);
     $pageNum = getPagination($page, $limite);
@@ -28,7 +29,7 @@ function contact() {
 }
 
 function connexion() {
-    //$connexion = getConnexion();
+    $connexion = getConnexion();
     require 'view/vueConnexion.php';
 }
 

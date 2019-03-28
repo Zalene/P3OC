@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION["LAST_ACTIVITY"]) && (time() - $_SESSION["LAST_ACTIVITY"] > strtotime("+2 minutes"))) {
-    session_unset(); 
-    session_destroy();
-}
-$_SESSION['LAST_ACTIVITY'] = time();
-?>
-
 <!DOCTYPE html>
 <html>
     <head>

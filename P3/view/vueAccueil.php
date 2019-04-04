@@ -1,5 +1,7 @@
 <?php require("includes/head.php"); ?>
-        
+
+<?php //$this->titre = "Accueil"; ?>
+
 <body data-spy="scroll" data-target=".navbar">
     <section id="introduction" class="col-xs-12">
         <?php require("includes/header.php"); ?>

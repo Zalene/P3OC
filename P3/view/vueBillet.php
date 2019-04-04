@@ -13,7 +13,7 @@
             <div class="barre_separation col-xs-offset-5 col-xs-2"></div>
         </div>
             <?php
-            while ($donnees = $viewBillet->fetch())
+            while ($donnees = $getViewBillet->fetch())
             {
             ?>
 
@@ -51,6 +51,7 @@
                         }
                     }
             }
+            //$getViewBillet->closeCursor();
             ?>
             </div>
 
@@ -64,7 +65,7 @@
             <h2>Commentaires</h2>
 
             <?php
-            while ($donnees = $listComments->fetch())
+            while ($donnees = $getListComments->fetch())
             {
             ?>
             <div class="col-xs-12">
@@ -104,7 +105,7 @@
             </div>
             <?php
             } // Fin de la boucle des commentaires
-            $listComments->closeCursor();
+            //$getListComments->closeCursor();
             ?>
         </div>
         <div class="container">

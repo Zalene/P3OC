@@ -27,7 +27,7 @@
                     <tbody>
 
                     <?php
-                    while($donnees = $adminMembers->fetch())
+                    while($donnees = $getAdminMembers->fetch())
                     {
                     ?>
                         <tr>
@@ -43,7 +43,7 @@
                         </tr>
                     <?php
                     }
-                    $adminMembers->closeCursor();
+                    $getAdminMembers->closeCursor();
                     ?>
                     </tbody>
                 </table>

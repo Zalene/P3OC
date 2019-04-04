@@ -16,7 +16,7 @@
 
         <div class="admin_block">
             <?php
-            while ($donnees = $reportedComments->fetch())
+            while ($donnees = $getAdminReportedComments->fetch())
             {
                 $report = $donnees['report'];
                 if($report != 0)
@@ -50,7 +50,7 @@
                 <?php
                 }
             }
-            $reportedComments->closeCursor();
+            $getAdminReportedComments->closeCursor();
             ?>
         </div>
     </div>

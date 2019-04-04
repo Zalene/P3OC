@@ -14,7 +14,7 @@
         </div>
             <?php
 
-            while ($donnees = $PaginationBlog->fetch())
+            while ($donnees = $getChapters->fetch())
             {
             ?>
             <div id="news-article" class="container">
@@ -39,7 +39,7 @@
             </div>
             <?php
             } // Fin de la boucle des billets
-            $PaginationBlog->closeCursor();
+            //$getChapters->closeCursor();
             ?>
             <div class="container">
                 <?php

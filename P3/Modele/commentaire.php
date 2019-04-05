@@ -26,50 +26,42 @@ class Comment extends Modele {
     }
 
     public function getUpdateComment() {
-        $bdd = $this->getDbConnect();
-    
         $id_el = $_POST['id'];
     
-        $req = $bdd->query("SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el");
-        $donnees = $req->fetch();
-        return $req;
+        $sql = "SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el";
+        $updateComment = $this->executerRequete($sql, array());
+        return $updateComment;
     }
     
     public function getDeleteComment($id_billet) {
-        $bdd = $this->getDbConnect();
-    
         if(isset($_POST['deleteComment'])){
             $id_com = $_POST['id'];
     
-            $bdd->query("DELETE FROM commentaires WHERE id= $id_com");
+            $sql = "DELETE FROM commentaires WHERE id= $id_com";
+            $deleteComment = $this->executerRequete($sql, array());
     
             header('Location: index.php?action=article&billet= '. $id_billet .' ');
         }
     }
     
     public function getReportComment($id_billet) {
-        $bdd = $this->getDbConnect();
-    
         if(isset($_POST['reportComment'])){
             $id_com = $_POST['id'];
     
-            $sth = $bdd->prepare('UPDATE commentaires SET report = 1 WHERE id = :id');
-            $sth->bindValue(':id', $id_com, PDO::PARAM_INT);
-            $sth->execute();
+            $sql = "UPDATE commentaires SET report = 1 WHERE id = $id_com";
+            $reportComment = $this->executerRequete($sql, array());
     
             header('Location: index.php?action=article&billet= '. $id_billet .' ');
         }
     }
     
     public function getPostComment($id_billet) {
-        $bdd = $this->getDbConnect();
-    
         if(isset($_POST['postComment'])) {
-    
-            $req = $bdd->prepare('INSERT INTO commentaires (id_billet, auteur, commentaire, report, date_commentaire) VALUES(?, ?, ?, 0, NOW())');
-            $req->execute(array($id_billet, $_POST['auteur'], $_POST['commentaire']));
+            $sql = 'INSERT INTO commentaires (id_billet, auteur, commentaire, report, date_commentaire) VALUES(?, ?, ?, 0, NOW())';
+            $postComment = $this->executerRequete($sql, array($id_billet, $_POST['auteur'], $_POST['commentaire']));
             
             header('Location: index.php?action=article&billet= '. $id_billet .' ');
+            return $postComment;
         }
     }
     
@@ -97,7 +89,8 @@ class Comment extends Modele {
         if(isset($_POST['unreportComment'])){
             $id_com = $_POST['id'];
     
-            $bdd->query("UPDATE commentaires SET report = 0 WHERE id = $id_com");
+            $sql = "UPDATE commentaires SET report = 0 WHERE id = $id_com";
+            $unreportAdminComment = $this->executerRequete($sql, array());
     
             header('Location: index.php?action=adminComments');
         }
@@ -107,7 +100,8 @@ class Comment extends Modele {
         if(isset($_POST['deleteComment'])){
             $id_com = $_POST['id'];
     
-            $bdd->query("DELETE FROM commentaires WHERE id = $id_com");
+            $sql = "DELETE FROM commentaires WHERE id = $id_com";
+            $deleteAdminComment = $this->executerRequete($sql, array());
     
             header('Location: index.php?action=adminComments');
         }

@@ -2,19 +2,19 @@
 
 require_once 'Controleur/controleurAccueil.php';
 require_once 'Controleur/controleurBlog.php';
-require_once 'Controleur/controleurBillet.php';
 require_once 'Controleur/controleurBio.php';
 require_once 'Controleur/controleurContact.php';
 require_once 'Controleur/controleurConnexion.php';
 require_once 'Controleur/controleurInscription.php';
 require_once 'Controleur/controleurDeconnexion.php';
-//require_once 'Controleur/controleurInscription.php';
-//require_once 'Controleur/controleurInscription.php';
+require_once 'Controleur/controleurBillet.php';
+require_once 'Controleur/controleurAdminUpdateBillet.php';
+require_once 'Controleur/controleurUpdateComment.php';
 require_once 'Controleur/controleurCreateBillet.php';
 require_once 'Controleur/controleurAdminComments.php';
 require_once 'Controleur/controleurAdminMembers.php';
 require_once 'Controleur/controleurChangePassword.php';
-//require_once 'Controleur/controleurInscription.php';
+require_once 'Controleur/controleurMention.php';
 require_once 'view/vue.php';
 
 class Routeur {
@@ -26,13 +26,14 @@ class Routeur {
     private $ctrlConnexion;
     private $ctrlInscription;
     private $ctrlDeconnexion;
-    //private $ctrlInscription;
-    //private $ctrlInscription;
+    private $ctrlBillet;
+    private $ctrlAdminUpdateBillet;
+    private $ctrlUpdateComment;
     private $ctrlCreateBillet;
     private $ctrlAdminComments;
     private $ctrlAdminMembers;
     private $ctrlChangePassword;
-    //private $ctrlInscription;
+    private $ctrlMention;
 
     public function __construct() {
         $this->ctrlAccueil = new ControleurAccueil();
@@ -43,13 +44,13 @@ class Routeur {
         $this->ctrlInscription = new ControleurInscription();
         $this->ctrlDeconnexion = new ControleurDeconnexion();
         $this->ctrlBillet = new ControleurBillet();
-        //$this->ctrlDeconnexion = new ControleurDeconnexion();
-        //$this->ctrlDeconnexion = new ControleurDeconnexion();
+        $this->ctrlAdminUpdateBillet = new ControleurAdminUpdateBillet();
+        $this->ctrlUpdateComment = new ControleurUpdateComment();
         $this->ctrlCreateBillet = new ControleurCreateBillet();
         $this->ctrlAdminComments = new ControleurAdminComments();
         $this->ctrlAdminMembers = new ControleurAdminMembers();
         $this->ctrlChangePassword = new ControleurChangePassword();
-        //$this->ctrlDeconnexion = new ControleurDeconnexion();
+        $this->ctrlMention = new ControleurMention();
       }
 
     public function routerRequete() {
@@ -77,10 +78,10 @@ class Routeur {
                     $this->ctrlBillet->billet();
                 }
                 elseif ($_GET['action'] == 'updateBillet') {
-                    adminUpdateBillets();
+                    $this->ctrlAdminUpdateBillet->adminUpdateBillets();
                 }
                 elseif ($_GET['action'] == 'updateComment') {
-                    updateComment();
+                    $this->ctrlUpdateComment->updateComment();
                 }
                 elseif ($_GET['action'] == 'createBillet') {
                     $this->ctrlCreateBillet->adminCreateBillet();
@@ -95,7 +96,7 @@ class Routeur {
                     $this->ctrlChangePassword->changePassword();
                 }
                 elseif ($_GET['action'] == 'mentions') {
-                    mentionsLegales();
+                    $this->ctrlMention->mentionsLegales();
                 }
             }
             else {

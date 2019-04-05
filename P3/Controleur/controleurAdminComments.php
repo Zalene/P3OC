@@ -14,7 +14,9 @@ class ControleurAdminComments {
 
     public function adminComments() {
         $adminComment = $this->adminComments->getAdminReportedComments();
+        $unreportComment = $this->adminComments->getAdminUnreportComment();
+        $deleteComment = $this->adminComments->getAdminDeleteComment();
         $vue = new Vue("AdminComments");
-        $vue->generer(array('getAdminReportedComments' => $adminComment));
+        $vue->generer(array('getAdminReportedComments' => $adminComment, 'getAdminUnreportComment' => $unreportComment, 'getAdminDeleteComment' => $deleteComment));
     }
 }

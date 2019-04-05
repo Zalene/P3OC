@@ -67,8 +67,7 @@
                     <div class="col-xs-12"><p class="erreur_inscription"><?php echo $erreur; ?></p></div>
                     <?php   
                     }
-                    ?>
-                  
+                    ?>                  
                 </div>
             </div>
         

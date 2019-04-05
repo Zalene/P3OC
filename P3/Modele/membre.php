@@ -11,12 +11,11 @@ class Membre extends Modele {
     }
     
     public function getAdminDeleteMembers() {
-        $bdd = $this->getDbConnect();
-    
         if(isset($_POST['deleteMember'])) {
             $id_member = $_POST['id'];
     
-            $bdd->query("DELETE FROM membres WHERE id= $id_member");
+            $sql = "DELETE FROM membres WHERE id= $id_member";
+            $deleteMember = $this->executerRequete($sql, array());
     
             header('Location: index.php?action=adminMembers');
         }
@@ -24,6 +23,11 @@ class Membre extends Modele {
 
     //FUNCTION BIOGRAPHIE
     public function getBio() {
+
+    }
+
+    //FUNCTION MENTIONS LEGALES
+    public function getMention() {
 
     }
 
@@ -71,13 +75,14 @@ class Membre extends Modele {
             {
                 if($pseudolength <= 25)
                 {
-                    $reqpseudo = $bdd->prepare('SELECT * FROM membres WHERE pseudo = ?');
-                    $reqpseudo->execute(array($pseudo));
+                    $sql1 = 'SELECT * FROM membres WHERE pseudo = ?';
+                    $reqpseudo = $this->executerRequete($sql1, array($pseudo));
                     $pseudoexiste = $reqpseudo->rowcount();
 
-                    $reqemail = $bdd->prepare('SELECT * FROM membres WHERE email = ?');
-                    $reqemail->execute(array($email));
+                    $sql2 = 'SELECT * FROM membres WHERE email = ?';
+                    $reqemail = $this->executerRequete($sql2, array($email));
                     $emailexiste = $reqemail->rowcount();
+                    
                     if($pseudoexiste == 0 AND $emailexiste == 0)
                     {
                         if(preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $email))
@@ -86,11 +91,11 @@ class Membre extends Modele {
                             {
                                 if($password == $password2)
                                 {
-                                    $req = $bdd->prepare('INSERT INTO membres(id_groupe, pseudo, email, pass, date_inscription) VALUES (2, :pseudo, :email, :pass, CURDATE())');
-                                    $req->execute(array(
-                                        'pseudo' => $pseudo,
-                                        'email' => $email,
-                                        'pass' => password_hash($password, PASSWORD_DEFAULT)));
+                                    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+                                    $sql3 = "INSERT INTO membres(id_groupe, pseudo, email, pass, date_inscription) VALUES (2, '$pseudo', '$email', '$passwordHashed', CURDATE())";
+                                    $req = $this->executerRequete($sql3, array($email));
+
+                                    header('Location: index.php');
                                 }
                                 else
                                 {
@@ -131,19 +136,16 @@ class Membre extends Modele {
                 $password = trim($_POST['password']);
                 $password2 = trim($_POST['password2']);
                 $oldPassword = trim($_POST['oldPassword']);
-
                 $passwordlength = strlen($password);
                 $pseudo = $_SESSION['pseudo'];
 
                 if(!empty($oldPassword) AND !empty($password) AND !empty($password2))
                 {
-                    $reqId = $bdd->prepare('SELECT * FROM membres WHERE pseudo = ?');
-                    $reqId->execute(array($pseudo));
+                    $sql1 = 'SELECT * FROM membres WHERE pseudo = ?';
+                    //$reqId->execute(array($pseudo));
+                    $reqId = $this->executerRequete($sql1, array($pseudo));
                     $membersExiste = $reqId->rowcount();
                     while ($row = $reqId->fetch()) { $passwordbdd=$row['pass']; $pseudoId=$row['pseudo']; }
-
-                    $pseudoMdpChange = $pseudoId;
-
 
                     if($oldPassword == password_verify($oldPassword, $passwordbdd))
                     {
@@ -151,10 +153,10 @@ class Membre extends Modele {
                         {
                             if($password == $password2)
                             {
-                                $sth = $bdd->prepare('UPDATE membres SET pass = :pass WHERE pseudo = :pseudo');
-                                $sth->bindValue(':pass', password_hash($password, PDO::PARAM_STR));
-                                $sth->bindValue(':pseudo', $pseudoMdpChange, PDO::PARAM_STR);
-                                $sth->execute();
+                                $passwordHashed = password_hash($password, PDO::PARAM_STR);
+                                $pseudoMdpChange = $pseudoId;
+                                $sql2 = "UPDATE membres SET pass = '$passwordHashed' WHERE pseudo = '$pseudoMdpChange'"; //. $pseudoMdpChange .
+                                $adminMember = $this->executerRequete($sql2, array());
 
                                 header('Location: index.php');
                             }

@@ -54,9 +54,10 @@ class Billet extends Modele {
         if(isset($_POST['deleteBillet'])){
             $id_el = $_POST['id'];
     
-            $bdd->query("DELETE FROM commentaires WHERE id_billet= $id_el");
-    
-            $bdd->query("DELETE FROM billets WHERE id= $id_el");
+            $sql1 = "DELETE FROM commentaires WHERE id_billet= $id_el";
+            $sql2 = "DELETE FROM billets WHERE id= $id_el";
+            $deleteComment = $this->executerRequete($sql1, array());
+            $deleteBillet = $this->executerRequete($sql2, array());
     
             header('Location: index.php?action=blog');
         }
@@ -70,8 +71,9 @@ class Billet extends Modele {
 
     //FUNCTION ADMIN
     public function getUpdateBillet($id_el) {
-        $req = $bdd->query("SELECT id, titre, contenu FROM billets WHERE id= $id_el");
-        return $req;
+        $sql = "SELECT id, titre, contenu FROM billets WHERE id= $id_el";
+        $updateBillet = $this->executerRequete($sql, array());
+        return $updateBillet;
     }
 
     public function getPushUpdateBillet($id_el) {
@@ -79,11 +81,8 @@ class Billet extends Modele {
             $title = $_POST['titre'];
             $content = $_POST['contenu'];
 
-            $sth = $bdd->prepare('UPDATE billets SET titre = :title, contenu = :content WHERE id = :id'); 
-            $sth->bindValue(':title', $title, PDO::PARAM_STR); 
-            $sth->bindValue(':content', $content, PDO::PARAM_STR);
-            $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
-            $sth->execute();
+            $sql = "UPDATE billets SET titre = '$title', contenu = '$content' WHERE id = '$id_el'";
+            $pushUpdateBillet = $this->executerRequete($sql, array());
 
             header('Location: index.php?action=article&billet= '. $id_el .' ');
         }
@@ -93,7 +92,6 @@ class Billet extends Modele {
         if(isset($_POST['button_billet'])) {
             $sql = 'INSERT INTO billets (titre, contenu, date_creation) VALUES(?, ?, NOW())';
             $newBillet = $this->executerRequete($sql, array($_POST['titre'], $_POST['contenu']));
-            //$req->execute(array($_POST['titre'], $_POST['contenu']));
     
             header('Location: index.php?action=blog');
     

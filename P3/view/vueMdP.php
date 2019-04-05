@@ -13,62 +13,6 @@
         </div>
         <?php
         include 'includes/functionsSQL.php';
-
-        if(isset($_SESSION['pseudo']))
-        {
-            if(isset($_POST['modifification_mdp']))
-            {
-                $password = trim($_POST['password']);
-                $password2 = trim($_POST['password2']);
-                $oldPassword = trim($_POST['oldPassword']);
-
-                $passwordlength = strlen($password);
-                $pseudo = $_SESSION['pseudo'];
-
-                if(!empty($oldPassword) AND !empty($password) AND !empty($password2))
-                {
-                    $reqId = $bdd->prepare('SELECT * FROM membres WHERE pseudo = ?');
-                    $reqId->execute(array($pseudo));
-                    $membersExiste = $reqId->rowcount();
-                    while ($row = $reqId->fetch()) { $passwordbdd=$row['pass']; $pseudoId=$row['pseudo']; }
-
-                    $pseudoMdpChange = $pseudoId;
-
-
-                    if($oldPassword == password_verify($oldPassword, $passwordbdd))
-                    {
-                        if($passwordlength >= 8)
-                        {
-                            if($password == $password2)
-                            {
-                                $sth = $bdd->prepare('UPDATE membres SET pass = :pass WHERE pseudo = :pseudo');
-                                $sth->bindValue(':pass', password_hash($password, PDO::PARAM_STR));
-                                $sth->bindValue(':pseudo', $pseudoMdpChange, PDO::PARAM_STR);
-                                $sth->execute();
-
-                                header('Location: index.php');
-                            }
-                            else
-                            {
-                                $erreur = "Les mots de passe ne sont pas identiques";
-                            }
-                        }
-                        else
-                        {
-                            $erreur = "Votre nouveau mot de passe fait moins de 8 caractères";
-                        }
-                    }
-                    else
-                    {
-                        $erreur = "Votre ancien mot de passe est incorrect";
-                    }
-                }
-                else
-                {
-                    $erreur = "Veuillez remplir tous les champs";
-                }
-            }
-        }
         ?>
 
         <div id="formulaire_connexion" class="container">

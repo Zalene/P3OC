@@ -41,7 +41,7 @@
 
                             </div>    
                             <div class="col-xs-2 col-sm-1 pull-right">
-                                <form method="post" action="" class="delete_form"> <!-- delete_billet.php -->
+                                <form method="post" action="" class="delete_form">
                                     <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
                                     <input type="submit" name="deleteBillet" class="delete btn btn-xs" value="Supprimer"/>
                                 </form>
@@ -51,7 +51,6 @@
                         }
                     }
             }
-            //$getViewBillet->closeCursor();
             ?>
             </div>
 

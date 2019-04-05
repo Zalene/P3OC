@@ -13,7 +13,8 @@ class ControleurAdminMembers {
 
     public function adminMembers() {
         $adminMember = $this->adminMembers->getAdminMembers();
+        $deleteMember = $this->adminMembers->getAdminDeleteMembers();
         $vue = new Vue("AdminMembres");
-        $vue->generer(array('getAdminMembers' => $adminMember));
+        $vue->generer(array('getAdminMembers' => $adminMember, 'getAdminDeleteMembers' => $adminMember));
     }
 }

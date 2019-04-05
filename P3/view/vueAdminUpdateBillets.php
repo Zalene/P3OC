@@ -14,7 +14,7 @@
             <div class="barre_separation col-xs-offset-5 col-xs-2"></div>
         </div>
     <?php
-    while ($donnees = $updateBillet->fetch())
+    while ($donnees = $getUpdateBillet->fetch())
     {
     ?> 
         <!-- MODIFICATION D'UN ARTICLE -->

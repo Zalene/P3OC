@@ -22,21 +22,17 @@ class ControleurBillet {
 
         //Billet
         $viewBillet = $this->billet->getViewBillet($id_billet);
-        $listComments = $this->comment->getListComments($id_billet);
-        //$deleteBillet = $this->billet->getDeleteBillet();
+        $deleteBillet = $this->billet->getDeleteBillet();
         //$buttonAdminBillet = $this->billet->getButtonBillet ();
-        $vue = new Vue("Billet");
-        $vue->generer(array('getViewBillet' => $viewBillet, 'getListComments' => $listComments));
-        //$vue->generer(array('getViewBillet' => $viewBillet));
 
         //Comments
-        //$listComments = $this->billet->getListComments ($page, $limite);
-        //$listComments = $this->comment->getListComments ($page, $limite);
-        //$vue = new Vue("Comments");
-        //$vue->generer(array('getListComments' => $listComments));
-        //$deleteComment = $this->billet->getDeleteComment($id_billet);
-        //$reportComment = $this->billet->getReportComment($id_billet);
-        //$postComment = $this->billet->getPostComment($id_billet);
+        $listComments = $this->comment->getListComments($id_billet);
+        $postComment = $this->comment->getPostComment($id_billet);
+        $deleteComment = $this->comment->getDeleteComment($id_billet);
+        $reportComment = $this->comment->getReportComment($id_billet);
+
+        $vue = new Vue("Billet");
+        $vue->generer(array('getViewBillet' => $viewBillet, 'getListComments' => $listComments, 'getPostComment' => $postComment, 'getDeleteBillet' => $deleteBillet, 'getDeleteComment' => $deleteComment, 'getReportComment' => $reportComment));
 
         //Pagination
         //$pageNum = $this->billet->getPagination($page, $limite);

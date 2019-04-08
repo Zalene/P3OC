@@ -4,25 +4,30 @@ require_once 'Modele/modele.php';
 
 class Comment extends Modele {
 
-    public function getListComments($id_billet) {//$page, $limite
-        // Récupération des commentaires
+    public function getListComments($debut, $limite, $id_billet) {
         $id_billet = $_GET['billet'];
         $limite = 5;
-        //$debut = ($page - 1) * $limite;
-        $sql = 'SELECT SQL_CALC_FOUND_ROWS id, auteur, commentaire, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %H:%i\') AS date_commentaire_fr FROM commentaires WHERE id_billet = '. $id_billet .' ORDER BY date_commentaire DESC LIMIT '. $limite .'';//:debut, :limite
-        //$query = $bdd->prepare($query);
-        //$query->bindValue('limite', $limite, PDO::PARAM_INT);
-        //$query->bindValue('debut', $debut, PDO::PARAM_INT);
-        //$query->bindValue('billet', $_GET['billet'], PDO::PARAM_INT);
-        //$query->execute();
 
+        $sql = "SELECT id, auteur, commentaire, DATE_FORMAT(date_commentaire, \"%d/%m/%Y à %H:%i\") AS date_commentaire_fr FROM commentaires WHERE id_billet = $id_billet ORDER BY date_commentaire DESC LIMIT $debut, $limite";//:debut, :limite
         $commentsBillet = $this->executerRequete($sql, array());
+
         return $commentsBillet;
-    
-        //$resultFoundRows = $bdd->query('SELECT found_rows()');
-    
-        //$nombredElementsTotal = $resultFoundRows->fetchColumn();
-        //return $query;
+    }
+
+    public function getPaginationComments($limite, $id_billet) {
+        $sql = "SELECT COUNT(id) AS nbComments FROM commentaires WHERE id_billet = $id_billet LIMIT $limite";
+        $req = $this->executerRequete($sql, array());
+        $donnees = $req->fetch(PDO::FETCH_ASSOC);
+        $nbCommentsTotal = $donnees['nbComments'];
+        $nombreDePages = ceil($nbCommentsTotal/$limite);
+
+        return $nombreDePages;
+    }
+
+    public function getPageComment() {
+        $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+
+        return $page;
     }
 
     public function getUpdateComment() {

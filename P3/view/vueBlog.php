@@ -38,28 +38,25 @@
                 </div>
             </div>
             <?php
+            //var_dump($getPaginationBilletsTotal);
+            //die;
             } // Fin de la boucle des billets
-            //$getChapters->closeCursor();
+
             ?>
             <div class="container">
                 <?php
-                    
-                    if ($page > 1){
-                    ?><a href="?action=blog&amp;page=<?php echo $page - 1; ?>">Page précédente</a> — <?php
+                    if ($getPage > 1){
+                    ?><a href="?action=blog&amp;page=<?php echo $getPage - 1; ?>">Page précédente</a> — <?php
                     }
 
                     // On effectue une boucle autant de fois que l'on a de pages
-                    for ($i = 1; $i <= $pageNum; $i++){
+                    for ($i = 1; $i <= $getPaginationBillets; $i++){
                         ?><a href="?action=blog&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
                     }
 
-                    if ($page < $pageNum){
-                        ?>— <a href="?action=blog&amp;page=<?php echo $page + 1; ?>">Page suivante</a><?php
+                    if ($getPage < $getPaginationBillets){
+                        ?>— <a href="?action=blog&amp;page=<?php echo $getPage + 1; ?>">Page suivante</a><?php
                     }
-
-                    var_dump($pageNum);
-                    die;
-
                 ?>
             </div>
     </div>

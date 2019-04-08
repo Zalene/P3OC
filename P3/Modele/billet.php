@@ -8,43 +8,37 @@ class Billet extends Modele {
     public function getLastBillet() {
         $sql = 'SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 0, 1';
         $lastBillet = $this->executerRequete($sql, array());
+        
         return $lastBillet;
     }
 
     //FUNCTION BLOG TOUT LES CHAPITRES
-    public function getChapters($page, $limite) {
-        $debut = ($page - 1) * $limite;
-        $sql = 'SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 5';//:debut, :limite
-        //$sql->bindValue('limite', $limite, PDO::PARAM_INT);
-        //$sql->bindValue('debut', $debut, PDO::PARAM_INT);
+    public function getChapters($debut, $limite) {
+        $sql = "SELECT id, titre, contenu, DATE_FORMAT(date_creation, \"%d/%m/%Y à %H:%i\") AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT $debut, $limite";//:debut, :limite
         $billets = $this->executerRequete($sql, array());
 
         return $billets;
+    }
 
-        //$debut = ($page - 1) * $limite;
-        //$query = 'SELECT SQL_CALC_FOUND_ROWS id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %H:%i\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT :debut, :limite';
-        //$query = $bdd->prepare($query);
-        //$query->bindValue('limite', $limite, PDO::PARAM_INT);
-        //$query->bindValue('debut', $debut, PDO::PARAM_INT);
-        //$query->execute();
+    public function getPaginationBillets($limite) {
+        $sql = "SELECT COUNT(id) AS nbBillets FROM billets LIMIT $limite";
+        $req = $this->executerRequete($sql, array());
+        $donnees = $req->fetch(PDO::FETCH_ASSOC);
+        $nbBilletsTotal = $donnees['nbBillets'];
+        $nombreDePages = ceil($nbBilletsTotal/$limite);
 
-        //$resultFoundRows = $bdd->query('SELECT found_rows()');
+        return $nombreDePages;
+    }
 
-        //$nombredElementsTotal = $resultFoundRows->fetchColumn();
-        
-        // Calcule du nombre de pages
-        //$nombreDePages = ceil($nombredElementsTotal / $limite);
+    public function getPage() {
+        $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
 
-        //return $query;
+        return $page;
     }
 
     public function getViewBillet($id_billet) {
         $sql = 'SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets WHERE id = '. $id_billet .'';//id = :id_billet
-        //$sql->bindValue('id_billet', $id_billet, PDO::PARAM_INT);
         $billet = $this->executerRequete($sql, array());
-        //$req = $bdd->prepare($req);
-        //$sql->bindValue('id_billet', $id_billet, PDO::PARAM_INT);
-        //$req->execute();
     
         return $billet;
     }
@@ -64,9 +58,9 @@ class Billet extends Modele {
     }
 
     public function getButtonBillet() {
-        $req = $bdd->prepare('SELECT id_groupe FROM membres WHERE id_groupe = 1');
-        $donneesGroupe = $req->fetch();
-        return $req;
+        $sql = 'SELECT id_groupe FROM membres WHERE id_groupe = 1';
+        $donneesGroupe = $this->executerRequete($sql, array());
+        return $donneesGroupe;
     }
 
     //FUNCTION ADMIN

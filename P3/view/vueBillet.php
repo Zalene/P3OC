@@ -110,16 +110,16 @@
         <div class="container">
                 <?php
 
-                if ($page > 1):
-                    ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $page - 1; ?>#list_commentaires">Page précédente</a> — <?php
+                if ($getPageComment > 1):
+                    ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $getPageComment - 1; ?>">Page précédente</a> — <?php
                 endif;
 
-                for ($i = 1; $i <= $pageNum; $i++):
-                    ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $i; ?>#list_commentaires"><?php echo $i; ?></a> <?php
+                for ($i = 1; $i <= $getPaginationComments; $i++):
+                    ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
                 endfor;
 
-                if ($page < $pageNum):
-                    ?>— <a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $page + 1; ?>#list_commentaires">Page suivante</a><?php
+                if ($getPageComment < $getPaginationComments):
+                    ?>— <a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $getPageComment + 1; ?>">Page suivante</a><?php
                 endif;
                 ?>
             </div>

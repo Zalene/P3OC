@@ -18,29 +18,27 @@ class ControleurBillet {
     public function billet() {
         $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
         $limite = 5;
+        $debut = ($page - 1) * $limite;
         $id_billet = $_GET['billet'];
 
         //Billet
         $viewBillet = $this->billet->getViewBillet($id_billet);
         $deleteBillet = $this->billet->getDeleteBillet();
-        //$buttonAdminBillet = $this->billet->getButtonBillet ();
+        $buttonAdminBillet = $this->billet->getButtonBillet();
 
         //Comments
-        $listComments = $this->comment->getListComments($id_billet);
+        $listComments = $this->comment->getListComments($debut, $limite, $id_billet);
         $postComment = $this->comment->getPostComment($id_billet);
         $deleteComment = $this->comment->getDeleteComment($id_billet);
         $reportComment = $this->comment->getReportComment($id_billet);
 
-        $vue = new Vue("Billet");
-        $vue->generer(array('getViewBillet' => $viewBillet, 'getListComments' => $listComments, 'getPostComment' => $postComment, 'getDeleteBillet' => $deleteBillet, 'getDeleteComment' => $deleteComment, 'getReportComment' => $reportComment));
-
         //Pagination
-        //$pageNum = $this->billet->getPagination($page, $limite);
-        //require 'view/vueBillet.php';
-
-        // Affiche le dernier billet du blog
-        //$lastBillet = $this->billet->getLastBillet();
-        //$vue = new Vue("Accueil");
-        //$vue->generer(array('lastBillet' => $lastBillet));
+        $paginationComments = $this->comment->getPaginationComments($limite, $id_billet);
+        $pages = $this->comment->getPageComment();
+        
+        $vue = new Vue("Billet");
+        $vue->generer(array('getViewBillet' => $viewBillet, 'getDeleteBillet' => $deleteBillet, 'getButtonBillet' => $buttonAdminBillet, 
+        'getListComments' => $listComments, 'getPostComment' => $postComment, 'getDeleteComment' => $deleteComment, 'getReportComment' => $reportComment, 
+        'getPaginationComments' => $paginationComments, 'getPageComment' => $pages));
     }
 }

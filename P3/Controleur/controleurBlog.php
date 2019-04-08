@@ -16,10 +16,15 @@ class ControleurBlog {
         // On récupère 5 billets par page
         $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
         $limite = 5;
+        $debut = ($page - 1) * $limite;
 
-        $allBillets = $this->billets->getChapters($page, $limite);
+        $allBillets = $this->billets->getChapters($debut, $limite);
+
+        //Pagination
+        $paginationBillets = $this->billets->getPaginationBillets($limite);
+        $pages = $this->billets->getPage();
+
         $vue = new Vue("Blog");
-        //$pageNum = $this->billets->getPagination($page, $limite);
-        $vue->generer(array('getChapters' => $allBillets));
+        $vue->generer(array('getChapters' => $allBillets, 'getPaginationBillets' => $paginationBillets, 'getPage' => $pages));
     }
 }

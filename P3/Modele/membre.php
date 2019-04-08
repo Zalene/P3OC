@@ -142,7 +142,6 @@ class Membre extends Modele {
                 if(!empty($oldPassword) AND !empty($password) AND !empty($password2))
                 {
                     $sql1 = 'SELECT * FROM membres WHERE pseudo = ?';
-                    //$reqId->execute(array($pseudo));
                     $reqId = $this->executerRequete($sql1, array($pseudo));
                     $membersExiste = $reqId->rowcount();
                     while ($row = $reqId->fetch()) { $passwordbdd=$row['pass']; $pseudoId=$row['pseudo']; }

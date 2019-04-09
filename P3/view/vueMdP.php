@@ -1,9 +1,9 @@
-<?php include("includes/head.php"); ?>
+<?php require("view/includes/head.php"); ?>
         
 <body>
     <div class="corps">
         <div id="top-header">
-            <?php include("includes/header.php"); ?>
+            <?php require("view/includes/header.php"); ?>
         </div>
         <div id="bottom-header" class="container-fluid col-xs-12"></div>
 
@@ -11,10 +11,7 @@
             <h1 class="title-blog">MODIFICATION DE MOT DE PASSE</h1>
             <div class="barre_separation col-xs-offset-4 col-xs-4 col-md-offset-5 col-md-2"></div>
         </div>
-        <?php
-        include 'includes/functionsSQL.php';
-        ?>
-
+        
         <div id="formulaire_connexion" class="container">
             <form method="POST" action="" class="form-horizontal">
                 <fieldset>
@@ -66,7 +63,7 @@
         </div>
     </div>
 
-<?php include("includes/footer.php"); ?>
+<?php require("view/includes/footer.php"); ?>
 
 </body>
 </html>

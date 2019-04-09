@@ -13,7 +13,8 @@ class ControleurChangePassword {
 
     public function changePassword() {
         $passwordChanged = $this->changePassword->getChangePassword();
+        $session= $this->changePassword->getMenuSession();
         $vue = new Vue("MdP");
-        $vue->generer(array('getChangePassword' => $passwordChanged));
+        $vue->generer(array('getChangePassword' => $passwordChanged, 'getMenuSession' => $session));
     }
 }

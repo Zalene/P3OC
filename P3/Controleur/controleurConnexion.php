@@ -14,7 +14,8 @@ class ControleurConnexion {
 
     public function connexion() {
         $log = $this->login->getLogin();
+        $session= $this->login->getMenuSession();
         $vue = new Vue("Connexion");
-        $vue->generer(array('getLogin' => $log));
+        $vue->generer(array('getLogin' => $log, 'getMenuSession' => $session));
     }
 }

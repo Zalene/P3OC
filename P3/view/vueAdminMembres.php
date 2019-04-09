@@ -1,10 +1,10 @@
-<?php include("includes/head.php"); ?>
+<?php require("view/includes/head.php"); ?>
         
 <body>
     <div class="corps">
 
         <div id="top-header">
-            <?php include("includes/header.php"); ?>
+            <?php require("view/includes/header.php"); ?>
         </div>
 
         <div id="bottom-header" class="container-fluid col-xs-12"></div>
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-    <?php include("includes/footer.php"); ?>
+    <?php require("view/includes/footer.php"); ?>
 
 
 </body>

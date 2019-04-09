@@ -1,10 +1,10 @@
-<?php include("includes/head.php"); ?>
+<?php require("view/includes/head.php"); ?>
         
 <body>
     <div class="corps">
 
         <div id="top-header">
-            <?php include("includes/header.php"); ?>
+            <?php require("view/includes/header.php"); ?>
         </div>
         <div id="bottom-header" class="container-fluid col-xs-12"></div>
 
@@ -14,29 +14,9 @@
             <div class="barre_separation col-xs-offset-5 col-xs-2"></div>
         </div>
     <?php
-    include 'includes/functionsSQL.php';
-
-    $id_el = $_POST['id'];
-
-    $req = $bdd->query("SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el");
-    $donnees = $req->fetch();
-
-    if(isset($_POST['updateButtonComment'])) {
-        $id_el = $_POST['id'];
-        $author = $_POST['auteur'];
-        $comment = $_POST['commentaire'];
-        $billet = $_POST['id_billet'];
-
-        $sth = $bdd->prepare('UPDATE commentaires SET auteur = :author, commentaire = :comment WHERE id = :id'); 
-        $sth->bindValue(':author', $author, PDO::PARAM_STR); 
-        $sth->bindValue(':comment', $comment, PDO::PARAM_STR);
-        $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
-        $sth->execute();
-
-        header('Location: index.php?action=article&billet= '. $billet .' ');
-    }
+    while ($donnees = $getUpdateComment->fetch())
+    {
     ?> 
-
         <!-- MODIFICATION D'UN COMMENTAIRE -->
         <div id="formulaire_connexion" class="container">
             <form method='POST' action='' class="form-horizontal">
@@ -70,9 +50,10 @@
             </fieldset>
             </form>
         </div>
+    <?php } ?>
     </div>
 
-    <?php include("includes/footer.php"); ?>
+    <?php require("view/includes/footer.php"); ?>
 
 </body>
 </html>

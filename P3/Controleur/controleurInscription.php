@@ -13,7 +13,8 @@ class ControleurInscription {
 
     public function inscription() {
         $register = $this->inscription->getInscription();
+        $session= $this->inscription->getMenuSession();
         $vue = new Vue("Inscription");
-        $vue->generer(array('getInscription' => $register));
+        $vue->generer(array('getInscription' => $register, 'getMenuSession' => $session));
     }
 }

@@ -13,7 +13,8 @@ class ControleurBio {
 
     function biographie() {
         $viewBio = $this->bio->getBio();
+        $session= $this->bio->getMenuSession();
         $vue = new Vue("Bio");
-        $vue->generer(array('getBio' => $viewBio));
+        $vue->generer(array('getBio' => $viewBio, 'getMenuSession' => $session));
     }
 }

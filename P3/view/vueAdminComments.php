@@ -1,10 +1,10 @@
-<?php include("includes/head.php"); ?>
+<?php require("view/includes/head.php"); ?>
         
 <body>
     <div class="corps">
 
         <div id="top-header">
-            <?php include("includes/header.php"); ?>
+            <?php require("view/includes/header.php"); ?>
         </div>
 
         <div id="bottom-header" class="container-fluid col-xs-12"></div>
@@ -21,40 +21,40 @@
                 $report = $donnees['report'];
                 if($report != 0)
                 {
-                ?>
-                    <div class="col-xs-12">
-                        <div class="single-commentaire  col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
-                            <p><strong><?php echo htmlspecialchars($donnees['auteur']); ?></strong> le <?php echo $donnees['date_commentaire_fr']; ?></p>
-                            <p><?php echo nl2br(htmlspecialchars($donnees['commentaire'])); ?></p>
-                            <div class="col-xs-12">
+            ?>
+                <div class="col-xs-12">
+                    <div class="single-commentaire  col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+                        <p><strong><?php echo htmlspecialchars($donnees['auteur']); ?></strong> le <?php echo $donnees['date_commentaire_fr']; ?></p>
+                        <p><?php echo nl2br(htmlspecialchars($donnees['commentaire'])); ?></p>
+                        <div class="col-xs-12">
 
-                                <form method="post" action="" class="delete_form col-xs-3">
-                                    <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                    <input type="submit" name="unreportComment" class="update btn btn-xs" value="Laisser"/>
-                                </form>
+                            <form method="post" action="" class="delete_form col-xs-3">
+                                <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
+                                <input type="submit" name="unreportComment" class="update btn btn-xs" value="Laisser"/>
+                            </form>
 
-                                <form method="post" action="" class="delete_form col-xs-3">
-                                    <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
-                                    <input type="submit" name="deleteComment" class="delete btn btn-xs" value="Supprimer"/>
-                                </form>
-                            
-                            </div>
+                            <form method="post" action="" class="delete_form col-xs-3">
+                                <input type="hidden" name="id" value="<?php echo $donnees['id'] ?>"/>
+                                <input type="submit" name="deleteComment" class="delete btn btn-xs" value="Supprimer"/>
+                            </form>
+                        
                         </div>
                     </div>
+                </div>
                 <?php 
                 }
                 else
                 {
                 ?>
-                    <p>Il n'y a aucun commentaire signaler.</p>
-                <?php
+                <p>Il n'y a aucun commentaire signaler.</p>
+            <?php
                 }
             }
             $getAdminReportedComments->closeCursor();
             ?>
         </div>
     </div>
-    <?php include("includes/footer.php"); ?>
+    <?php require("view/includes/footer.php"); ?>
 
 
 </body>

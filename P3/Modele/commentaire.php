@@ -29,14 +29,6 @@ class Comment extends Modele {
 
         return $page;
     }
-
-    public function getUpdateComment() {
-        $id_el = $_POST['id'];
-    
-        $sql = "SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el";
-        $updateComment = $this->executerRequete($sql, array());
-        return $updateComment;
-    }
     
     public function getDeleteComment($id_billet) {
         if(isset($_POST['deleteComment'])){
@@ -66,25 +58,25 @@ class Comment extends Modele {
             $postComment = $this->executerRequete($sql, array($id_billet, $_POST['auteur'], $_POST['commentaire']));
             
             header('Location: index.php?action=article&billet= '. $id_billet .' ');
-            return $postComment;
         }
     }
+
+    public function getUpdateComment($id_el) {
+        $sql = "SELECT id, id_billet, auteur, commentaire FROM commentaires WHERE id= $id_el";
+        $updateComment = $this->executerRequete($sql, array());
+
+        return $updateComment;
+    }
     
-    public function getUpdateCommentPost() {
-        $bdd = $this->getDbConnect();
-    
-        if(isset($_POST['updateButtonComment'])) {
-            $id_el = $_POST['id'];
+    public function getPushUpdateComment($id_el) {
+        if(isset($_POST['updateButtonComment'])) {    
             $author = $_POST['auteur'];
             $comment = $_POST['commentaire'];
             $billet = $_POST['id_billet'];
-    
-            $sth = $bdd->prepare('UPDATE commentaires SET auteur = :author, commentaire = :comment WHERE id = :id'); 
-            $sth->bindValue(':author', $author, PDO::PARAM_STR); 
-            $sth->bindValue(':comment', $comment, PDO::PARAM_STR);
-            $sth->bindValue(':id', $id_el, PDO::PARAM_INT); 
-            $sth->execute();
-    
+
+            $sql = "UPDATE commentaires SET auteur = '$author', commentaire = '$comment' WHERE id = '$id_el'";
+            $updateComment = $this->executerRequete($sql, array());
+
             header('Location: index.php?action=article&billet= '. $billet .' ');
         }
     }
@@ -115,6 +107,7 @@ class Comment extends Modele {
     public function getAdminReportedComments() {    
         $sql = 'SELECT id, id_billet, auteur, commentaire, report, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %H:%i\') AS date_commentaire_fr FROM commentaires WHERE report = 1 ORDER BY date_commentaire';
         $viewReportedComments = $this->executerRequete($sql, array());
+
         return $viewReportedComments;
     }
 }

@@ -26,16 +26,4 @@ abstract class Modele {
         }
         return $this->bdd;
     }
-
-    //FUNCTION CONTACT
-
-
-
-
-    //function getRepSession() {
-        //$bdd = getDb();
-        //$reponseSession = $bdd->query('SELECT * FROM membres WHERE pseudo=\'' .$_SESSION['pseudo']. '\'');
-        //return $reponseSession;
-    //}
-
 }

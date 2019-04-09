@@ -1,9 +1,9 @@
-<?php include("includes/head.php"); ?>
+<?php require("view/includes/head.php"); ?>
         
 <body>
     <div class="corps">
         <div id="top-header">
-            <?php include("includes/header.php"); ?>
+            <?php require("view/includes/header.php"); ?>
         </div>
         <div id="bottom-header" class="container-fluid col-xs-12"></div>
 
@@ -13,7 +13,6 @@
             <h2 class="chapitre-blog">Liste des chapitres</h2>
         </div>
             <?php
-
             while ($donnees = $getChapters->fetch())
             {
             ?>
@@ -38,9 +37,7 @@
                 </div>
             </div>
             <?php
-            //var_dump($getPaginationBilletsTotal);
-            //die;
-            } // Fin de la boucle des billets
+            }
 
             ?>
             <div class="container">
@@ -61,7 +58,7 @@
             </div>
     </div>
 
-<?php include("includes/footer.php"); ?>
+<?php require("view/includes/footer.php"); ?>
 
 </body>
 </html>

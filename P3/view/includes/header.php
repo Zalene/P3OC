@@ -15,13 +15,9 @@
                 <li><a href="index.php?action=contact#formulaire_contact">Contact</a>
                 </li>
                 <?php
-                require 'includes/functionsSQL.php';
-
                 if(isset($_SESSION['pseudo']))
                 {
-                    $reponseSession = $bdd->query('SELECT * FROM membres WHERE pseudo=\'' .$_SESSION['pseudo']. '\'');
-
-                    while($donnees = $reponseSession->fetch())
+                    while($donnees = $getMenuSession->fetch())
                     {
                         $_SESSION['id_groupe'] = $donnees['id_groupe'];
                     }

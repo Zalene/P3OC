@@ -1,9 +1,9 @@
-<?php include("includes/head.php"); ?>
+<?php require("view/includes/head.php"); ?>
         
 <body data-spy="scroll" data-target=".navbar">
     <div class="corps">
         <div id="top-header">
-            <?php include("includes/header.php"); ?>
+            <?php require("view/includes/header.php"); ?>
         </div>
         <div id="bottom-header" class="container-fluid col-xs-12"></div>
 
@@ -103,8 +103,7 @@
                 </div>
             </div>
             <?php
-            } // Fin de la boucle des commentaires
-            //$getListComments->closeCursor();
+            }
             ?>
         </div>
         <div class="container">
@@ -159,7 +158,7 @@
             ?>
     </div>
 
-    <?php include("includes/footer.php"); ?>
+    <?php require("view/includes/footer.php"); ?>
 
 </body>
 </html>

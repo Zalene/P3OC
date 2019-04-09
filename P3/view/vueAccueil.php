@@ -1,10 +1,8 @@
-<?php require("includes/head.php"); ?>
-
-<?php //$this->titre = "Accueil"; ?>
+<?php require("view/includes/head.php"); ?>
 
 <body data-spy="scroll" data-target=".navbar">
     <section id="introduction" class="col-xs-12">
-        <?php require("includes/header.php"); ?>
+        <?php require("view/includes/header.php"); ?>
         <div class="container">
             <div class="row">
                 <h1>Billet Simple Pour L'Alaska</h1>
@@ -107,7 +105,7 @@
         </div>
     </section>
 
-<?php require("includes/footer.php"); ?>
+<?php require("view/includes/footer.php"); ?>
 
 </body>
 </html>

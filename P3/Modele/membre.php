@@ -7,6 +7,7 @@ class Membre extends Modele {
     public function getAdminMembers() {    
         $sql = 'SELECT id, pseudo, email, DATE_FORMAT(date_inscription, \'%d/%m/%Y\') AS date_inscription_fr FROM membres WHERE id_groupe = 2 ORDER BY date_inscription';
         $adminMember = $this->executerRequete($sql, array());
+        
         return $adminMember;
     }
     
@@ -20,6 +21,18 @@ class Membre extends Modele {
             header('Location: index.php?action=adminMembers');
         }
     }
+
+    //FUNCTION MENU
+    public function getMenuSession() {
+        if(isset($_SESSION['pseudo'])) {
+            $sql = 'SELECT * FROM membres WHERE pseudo=\'' .$_SESSION['pseudo']. '\'';
+            $reponseSession = $this->executerRequete($sql, array());
+    
+            return $reponseSession;
+        }
+    }
+
+
 
     //FUNCTION BIOGRAPHIE
     public function getBio() {

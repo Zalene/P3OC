@@ -7,9 +7,11 @@ require_once 'view/vue.php';
 class ControleurBlog {
 
     private $billets;
+    private $session;
 
     public function __construct() {
         $this->billets = new Billet();
+        $this->session = new Membre();
     }
 
     public function blog() {
@@ -24,7 +26,8 @@ class ControleurBlog {
         $paginationBillets = $this->billets->getPaginationBillets($limite);
         $pages = $this->billets->getPage();
 
+        $session= $this->session->getMenuSession();
         $vue = new Vue("Blog");
-        $vue->generer(array('getChapters' => $allBillets, 'getPaginationBillets' => $paginationBillets, 'getPage' => $pages));
+        $vue->generer(array('getChapters' => $allBillets, 'getPaginationBillets' => $paginationBillets, 'getPage' => $pages, 'getMenuSession' => $session));
     }
 }

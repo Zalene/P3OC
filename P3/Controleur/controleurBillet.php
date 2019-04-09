@@ -9,10 +9,12 @@ class ControleurBillet {
 
     private $billet;
     private $comment;
+    private $session;
 
     public function __construct() {
         $this->billet = new Billet();
         $this->comment = new Comment();
+        $this->session = new Membre();
     }
 
     public function billet() {
@@ -35,10 +37,11 @@ class ControleurBillet {
         //Pagination
         $paginationComments = $this->comment->getPaginationComments($limite, $id_billet);
         $pages = $this->comment->getPageComment();
-        
+
+        $session= $this->session->getMenuSession();
         $vue = new Vue("Billet");
         $vue->generer(array('getViewBillet' => $viewBillet, 'getDeleteBillet' => $deleteBillet, 'getButtonBillet' => $buttonAdminBillet, 
         'getListComments' => $listComments, 'getPostComment' => $postComment, 'getDeleteComment' => $deleteComment, 'getReportComment' => $reportComment, 
-        'getPaginationComments' => $paginationComments, 'getPageComment' => $pages));
+        'getPaginationComments' => $paginationComments, 'getPageComment' => $pages, 'getMenuSession' => $session));
     }
 }

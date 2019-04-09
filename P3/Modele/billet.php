@@ -14,7 +14,7 @@ class Billet extends Modele {
 
     //FUNCTION BLOG TOUT LES CHAPITRES
     public function getChapters($debut, $limite) {
-        $sql = "SELECT id, titre, contenu, DATE_FORMAT(date_creation, \"%d/%m/%Y à %H:%i\") AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT $debut, $limite";//:debut, :limite
+        $sql = "SELECT id, titre, contenu, DATE_FORMAT(date_creation, \"%d/%m/%Y à %H:%i\") AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT $debut, $limite";
         $billets = $this->executerRequete($sql, array());
 
         return $billets;
@@ -37,7 +37,7 @@ class Billet extends Modele {
     }
 
     public function getViewBillet($id_billet) {
-        $sql = 'SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets WHERE id = '. $id_billet .'';//id = :id_billet
+        $sql = 'SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM billets WHERE id = '. $id_billet .'';
         $billet = $this->executerRequete($sql, array());
     
         return $billet;
@@ -60,6 +60,7 @@ class Billet extends Modele {
     public function getButtonBillet() {
         $sql = 'SELECT id_groupe FROM membres WHERE id_groupe = 1';
         $donneesGroupe = $this->executerRequete($sql, array());
+
         return $donneesGroupe;
     }
 
@@ -67,6 +68,7 @@ class Billet extends Modele {
     public function getUpdateBillet($id_el) {
         $sql = "SELECT id, titre, contenu FROM billets WHERE id= $id_el";
         $updateBillet = $this->executerRequete($sql, array());
+
         return $updateBillet;
     }
 
@@ -88,8 +90,6 @@ class Billet extends Modele {
             $newBillet = $this->executerRequete($sql, array($_POST['titre'], $_POST['contenu']));
     
             header('Location: index.php?action=blog');
-    
-            return $newBillet;
         }
     }
 }

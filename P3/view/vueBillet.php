@@ -68,7 +68,7 @@
             {
             ?>
             <div class="col-xs-12">
-                <div class="single-commentaire  col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+                <div class="single-commentaire col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
                     <p><strong><?php echo htmlspecialchars($donnees['auteur']); ?></strong> le <?php echo $donnees['date_commentaire_fr']; ?></p>
                     <p><?php echo nl2br(htmlspecialchars($donnees['commentaire'])); ?></p>
                     <?php 
@@ -107,55 +107,57 @@
             ?>
         </div>
         <div class="container">
+            <ul class="pagination">
                 <?php
 
                 if ($getPageComment > 1):
-                    ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $getPageComment - 1; ?>">Page précédente</a> — <?php
+                    ?><li class="previous"><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $getPageComment - 1; ?>">Page précédente</a></li><?php
                 endif;
 
                 for ($i = 1; $i <= $getPaginationComments; $i++):
-                    ?><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
+                    ?><li><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li> <?php
                 endfor;
 
                 if ($getPageComment < $getPaginationComments):
-                    ?>— <a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $getPageComment + 1; ?>">Page suivante</a><?php
+                    ?><li class="next"><a href="?action=article&amp;billet=<?php echo $_GET['billet'];?>&amp;page=<?php echo $getPageComment + 1; ?>">Page suivante</a></li><?php
                 endif;
                 ?>
-            </div>
-            <?php
-            if(isset($_SESSION['pseudo']))
-            {
-            ?>
-            <div class="container formulaire-commentaire">
-                <form method='POST' action='' class="form-horizontal">
-                    <fieldset>
+            </ul>
+        </div>
+        <?php
+        if(isset($_SESSION['pseudo']))
+        {
+        ?>
+        <div class="container formulaire-commentaire">
+            <form method='POST' action='' class="form-horizontal">
+                <fieldset>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="auteur">Pseudo</label>  
-                            <div class="col-md-4">
-                                <input id="auteur" name="auteur" type="text" class="form-control input-md" readonly="readonly" value="<?php echo $_SESSION['pseudo']; ?>">
-                            </div>
-                    </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="auteur">Pseudo</label>  
+                        <div class="col-md-4">
+                            <input id="auteur" name="auteur" type="text" class="form-control input-md" readonly="readonly" value="<?php echo $_SESSION['pseudo']; ?>">
+                        </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="commentaire">Message</label>
-                            <div class="col-md-4">                     
-                                <textarea class="form-control mceNoEditor" id="commentaire" name="commentaire" placeholder="Vous pouvez saisir un message ici." rows="6"></textarea>
-                            </div>
-                    </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="commentaire">Message</label>
+                        <div class="col-md-4">                     
+                            <textarea class="form-control mceNoEditor" id="commentaire" name="commentaire" placeholder="Vous pouvez saisir un message ici." rows="6"></textarea>
+                        </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="singlebutton"></label>
-                            <div class="col-md-4">
-                                <button id="singlebutton" name="postComment" class="btn btn-primary">Envoyer</button>
-                            </div>
-                    </div>
-                    </fieldset>
-                </form>
-            </div>
-            <?php
-            }
-            ?>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <button id="singlebutton" name="postComment" class="btn btn-primary">Envoyer</button>
+                        </div>
+                </div>
+                </fieldset>
+            </form>
+        </div>
+        <?php
+        }
+        ?>
     </div>
 
     <?php require("view/includes/footer.php"); ?>

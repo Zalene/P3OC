@@ -41,20 +41,22 @@
 
             ?>
             <div class="container">
-                <?php
-                    if ($getPage > 1){
-                    ?><a href="?action=blog&amp;page=<?php echo $getPage - 1; ?>">Page précédente</a> — <?php
-                    }
+                <ul class="pagination">
+                    <?php
+                        if ($getPage > 1){
+                        ?><li class="previous"><a href="?action=blog&amp;page=<?php echo $getPage - 1; ?>">Précédent</a></li><?php
+                        }
 
-                    // On effectue une boucle autant de fois que l'on a de pages
-                    for ($i = 1; $i <= $getPaginationBillets; $i++){
-                        ?><a href="?action=blog&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
-                    }
+                        // On effectue une boucle autant de fois que l'on a de pages
+                        for ($i = 1; $i <= $getPaginationBillets; $i++){
+                            ?><li><a href="?action=blog&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li> <?php
+                        }
 
-                    if ($getPage < $getPaginationBillets){
-                        ?>— <a href="?action=blog&amp;page=<?php echo $getPage + 1; ?>">Page suivante</a><?php
-                    }
-                ?>
+                        if ($getPage < $getPaginationBillets){
+                            ?><li class="next"><a href="?action=blog&amp;page=<?php echo $getPage + 1; ?>">Suivant</a></li><?php
+                        }
+                    ?>
+                </ul>
             </div>
     </div>
 
